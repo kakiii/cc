@@ -438,6 +438,11 @@ const Game = () => {
     );
   };
 
+  const hello = () => {
+    fetch("/hello")
+      .then((res) => console.log(res.text()))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="game">
       {showEndingPage ? (
@@ -448,12 +453,11 @@ const Game = () => {
           {renderScene()}
           {result && <p>Result: {result}</p>}
           {gameEnded && <p>Game Ended</p>}
+          <button onClick={hello}>Hello</button>
         </>
       )}
     </div>
   );
 };
-
-// export default Game;
 
 export default Game;
