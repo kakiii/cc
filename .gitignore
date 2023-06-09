@@ -29,3 +29,5 @@ yarn-error.log*
 # Ignore build artifacts of the React app
 client/build
 server/build
+server/dist
+

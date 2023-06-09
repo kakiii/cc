@@ -9,7 +9,7 @@ const PORT = 8080;
 app.use(bodyParser.json());
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'dist')));
 console.log(__dirname);
 
 app.post('/record-choice', (req, res) => {
