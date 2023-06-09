@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# Ignore node_modules in both server and client directories
+**/node_modules
+
+# Ignore build artifacts of the React app
+client/build
+server/build
+server/dist
+
