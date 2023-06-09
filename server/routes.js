@@ -30,9 +30,5 @@ router.get("/choices", (req, res) => {
   });
 });
 
-router.get("/hello", (req, res) => {
-  res.status(200).send("Hello World!");
-  // res.sendStatus(200);
-});
 
 module.exports = router;
