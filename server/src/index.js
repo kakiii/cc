@@ -8,8 +8,8 @@ const app = express();
 const PORT = 8080;
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "dist")));
-app.use("/", routes); // Using the routes
+app.use(express.static(path.join(__dirname, "../dist")));
+app.use("/routes", routes); // Using the routes
 app.use("/api", api); // Using the routes
 
 app.listen(PORT, () => {
