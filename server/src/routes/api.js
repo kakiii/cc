@@ -1,37 +1,37 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
+const MongoClient = require('mongodb').MongoClient;
+
 require('dotenv').config();
 
-// Connect to MongoDB
-console.log(process.env.MONGODB_URI);
-mongoose.connect(String(process.env.MONGODB_URI), { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err));
+const uri = process.env.MONGODB_URI;
+console.log(uri);
 
-// Define a schema
-const Schema = mongoose.Schema;
-const dataSchema = new Schema({
-    name: String,
-    value: String
-});
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Create a model
-const Data = mongoose.model('Data', dataSchema);
+router.post('/data', (req, res) => {
+    
+    
+    client.connect(err => {
+        if (err) {
+            console.log('Connection error: ', err);
+            res.status(500).send('Error connecting to database');
+            client.close();
+            return;
+        }
 
-// Add a new data
-router.post('/add', async (req, res) => {
-    const data = new Data({
-        name: req.body.name,
-        value: req.body.value
+        const collection = client.db("crowd-computing").collection("user");
+        collection.insertOne(req.body, (err, result) => {
+            if (err) {
+                console.log('Error inserting data: ', err);
+                res.status(500).send('Error inserting data into database');
+            } else {
+                res.status(200).send('Data inserted successfully');
+            }
+
+            client.close();
+        });
     });
-
-    try {
-        const savedData = await data.save();
-        res.json(savedData);
-    } catch (err) {
-        res.json({ message: err });
-    }
 });
 
 module.exports = router;

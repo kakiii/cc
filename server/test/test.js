@@ -1,24 +1,25 @@
-const mongoose = require("mongoose");
-const chai = require("chai");
-const assert = chai.assert;
-require('dotenv').config();
 
-describe("MongoDB Connection", function () {
-  this.timeout(10000); // Increase timeout to 10 seconds
-    console.log(process.env.MONGODB_URI);
-  it("connects successfully", function (done) {
-    mongoose
-      .connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then(() => {
-        assert.isTrue(true);
-        done();
-      })
-      .catch((err) => {
-        assert.isTrue(false, "Could not connect to MongoDB");
-        done(err);
-      });
-  });
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://kakiwang:kakiwang@cc.sypebe8.mongodb.net/?retryWrites=true&w=majority";
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
