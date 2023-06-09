@@ -1,11 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = 5000;
+const PORT = 8080;
 
 app.use(bodyParser.json());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+console.log(__dirname);
 
 app.post('/record-choice', (req, res) => {
     const choice = req.body;
@@ -22,6 +27,7 @@ app.post('/record-choice', (req, res) => {
     });
   });
   
+
   app.get('/choices', (req, res) => {
     // Read the choices from the file and send as response
     fs.readFile('choices.json', 'utf8', (err, data) => {
