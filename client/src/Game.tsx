@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Form from "./Form";
 const Game = () => {
   const [scene, setScene] = useState(0);
   const [result, setResult] = useState("");
@@ -57,6 +58,7 @@ const Game = () => {
             <p>How would Kendall feel about this?</p>
             <button onClick={() => handleChoice("A")}>A: in love</button>
             <button onClick={() => handleChoice("B")}>B: angry</button>
+            <Form></Form>
           </>
         );
       case 1:
