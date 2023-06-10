@@ -30,7 +30,8 @@ const Game = () => {
         const response = await fetch('/chatgpt/hello');
         if (response.ok) {
           const data = await response.json();
-          setApiResponse(data);
+          const message = data.message.trim();
+          setApiResponse(JSON.stringify(message)); // Convert the object to a JSON string
         } else {
           throw new Error('Request failed with status ' + response.status);
         }
