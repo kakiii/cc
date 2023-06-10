@@ -1,11 +1,21 @@
 import { useState } from "react";
-
+import {
+  useUserId,
+  useContextId,
+  useOption,
+  useUserRationale,
+  useAiResponse,
+  useEmotion,
+  useGeneratedJSON
+} from "./JSONGenerator";
 /**
  * This is the main component of the game. It is the entry point for the game.import { useUserId, useContextId, useOption, useUserRationale, useAiResponse, useEmotion } from "./JSONGenerator";
 
 /**
 import Form from "./Form";
 */
+
+
 const Game = () => {
 
   const [scene, setScene] = useState("Begin");
@@ -13,15 +23,40 @@ const Game = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [showEndingPage, setShowEndingPage] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
-
+  const [rationale, setRationale] = useState("");
+  /**const [generatedJSON, setGeneratedJSON] = useGeneratedJSON();
+  const [userid, setUserId] = useUserId();
+  const [contextId, setContextId] = useContextId();
+  const [option, setOption] = useOption();
+  const [userRationale, setUserRationale] = useUserRationale();
+  const [aiResponse, setAiResponse] = useAiResponse();
+  const [emotion, setEmotion] = useEmotion();*/
+  
+  
   const handleChoice = (choice: string): void => {
     //const newScene: string = scene;
     const newResult: string = `${scene}+${choice}`;
+/**     const data = {
+      division: {
+          Option: option,
+          user_rationale: userRationale,
+          ai_response: aiResponse,
+          emotion
+      }
+    };
+    const allData = {
+      user_id: userid,
+      context_id: contextId,
+      division:data
+    };
+*/
+
 
     setResult(newResult);
-    setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
+    
 
     if (scene == "Begin" && choice === "In Love") {
+      
       setScene("In Love");
     }
     else if (scene == "Begin" && choice == "Angry") {
@@ -54,26 +89,35 @@ const Game = () => {
     else if (scene == "Ignored") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
     }
     else if (scene == "Loved_Talk To Jan") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
     }
     else if (scene == "Loved_Clean Her Home") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
     }
     else if (scene == "Detached") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
     }
     else if (scene == "Jan Gets Better") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
     }
     else if (scene == "Appreciates") {
       setGameEnded(true);
       setShowEndingPage(true);
+      setHistory((prevHistory: string[]) => [...prevHistory, newResult]);
+    }
+    else if (scene == "Ending"){
+      renderEndingPage();
     }
   };
 
@@ -85,18 +129,26 @@ const Game = () => {
         }
       };*/
 
-
-    const downloadHistory = () => {
-      const element = document.createElement("a");
-      const file = new Blob([JSON.stringify(history, null, 2)], {
-        type: "application/json",
-      });
-      element.href = URL.createObjectURL(file);
-      element.download = "game_history.json";
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    };
+      const sendToBackEnd = () => {
+        // TODO: Send the option and rationale to the backend
+        const data = {
+          option: scene,
+          rationale: rationale,
+        };
+        console.log(data);
+      };
+    
+      const downloadHistory = () => {
+        const element = document.createElement("a");
+        const file = new Blob([JSON.stringify(history, null, 2)], {
+          type: "application/json",
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "game_history.json";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      };
     /**    const submitButtonStyle = {
       marginTop: "-100px", // Adjust the marginTop value to move the button up
     }; */
@@ -111,9 +163,15 @@ const Game = () => {
               <p>How would Kendall feel about this?</p>
               <button onClick={() => handleChoice('In Love')}>A: In love</button>
               <button onClick={() => handleChoice('Angry')}>B: Angry</button>
+              <div 
+              style={{backgroundImage: "image/bg cafe.PNG"}}
+              >
+              </div>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale"/>
+              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
             </div>
           );
-        }
+          }
         case "In Love": {
           return (
             <div>
@@ -126,6 +184,8 @@ const Game = () => {
               <p>What will Kendall want to do next?</p>
               <button onClick={() => handleChoice('Talk To Jan')}>A: Talk to Jan</button>
               <button onClick={() => handleChoice('Clean Her Home')}>B: Clean her home</button>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale"/>
+              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
             </div>
           );
         }
@@ -143,6 +203,8 @@ const Game = () => {
               <p>What will happen to Jan?</p>
               <button onClick={() => handleChoice('Jan Gets Better')}>A: Jan will get better</button>
               <button onClick={() => handleChoice('Appreciates')}>C: Jan appreciates what Kendall does</button>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale"/>
+              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
             </div>
           );
           
@@ -160,6 +222,8 @@ const Game = () => {
               <p>How would Jan feel as a result?</p>
               <button onClick={() => handleChoice('Ignored')}>A: Being Ignored</button>
               <button onClick={() => handleChoice('Loved_Talk To Jan')}>B: Being Loved</button>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale"/>
+              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
             </div>
           );
           
@@ -177,6 +241,8 @@ const Game = () => {
               <p>How will Kendall feel?</p>
               <button onClick={() => handleChoice('Loved_Clean Her Home')}>A: Being Loved</button>
               <button onClick={() => handleChoice('Detached')}>B: Detached</button>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale"/>
+              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
             </div>
           );
           
@@ -194,6 +260,8 @@ const Game = () => {
               <p>Jan: (reflective) I've been guarded because of my past, but your actions and words show me that I can trust you. I want us to continue building our relationship.</p>
               <p>Kendall: (grateful) Jan, I'm here for you, and I want us to grow together. Let's work through any challenges that come our way and create a future filled with love and happiness.</p>
               <p>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
+            
             </div>
           );
           
@@ -207,6 +275,7 @@ const Game = () => {
               <p>Kendall: (tenderly) Jan, you deserve nothing less than love and support. I want to be the one who provides that for you, now and in the future.</p>
               <p>Jan: (grateful) With you by my side, I feel like I can overcome any challenges that come our way. Together, we can create a beautiful and fulfilling relationship.</p>
               <p>Consequence: (Scene: Jan's gratitude deepens their bond, and they continue to nurture their relationship with care, understanding, and unconditional love. Their shared appreciation and commitment to each other create a strong foundation, allowing their love to grow and flourish. Kendall's dedication to Jan's happiness fosters a sense of security and happiness, making their relationship a source of joy and fulfillment for both of them.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
             </div>
           );          
         }
@@ -223,6 +292,7 @@ const Game = () => {
               <p>Kendall: (taken aback) Jan, I didn't realize you felt this way. I'm devastated to hear that you want to end our relationship, but I respect your decision.</p>
               <p>Jan: (teary-eyed) Kendall, it's not an easy decision for me either. We had some beautiful moments together, but it feels like we've grown apart. It's time for both of us to find our own happiness.</p>
               <p>Consequence: (Scene: Kendall and Jan mutually agree to end their relationship, acknowledging that their paths have diverged. They part ways with a mix of sadness and gratitude for the time they shared. They cherish the memories they created but understand that it's time to move forward separately. They both embark on new journeys, learning and growing from the experiences they had together.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
             </div>
           );
           
@@ -238,6 +308,7 @@ const Game = () => {
               <p>Jan: (blushing) Kendall, you make me feel cherished and loved. The way you care for me and pay attention to the little details fills me with happiness. I'm grateful for our deep connection.</p>
               <p>Consequence: (Scene: Kendall and Jan's relationship continues to flourish, filled with love, understanding, and mutual respect. They create a harmonious life together, supporting each other's dreams and aspirations. As time passes, their commitment deepens, and they decide to take their relationship to the next level.)</p>
               <p>(Scene: Kendall and Jan celebrate their engagement, surrounded by love and the promise of a lifelong partnership. They embark on a beautiful journey together, building a life filled with warmth, trust, and unwavering love.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
             </div>
           );
           
@@ -250,6 +321,7 @@ const Game = () => {
               <p>Jan: (beaming) Kendall, I'm amazed at how you found this gem of a home. You truly have a knack for creating a beautiful and comfortable space.</p>
               <p>Kendall: (feeling loved and accomplished) Jan, your words mean the world to me. I wanted us to have a place we can truly call home, and seeing your happiness makes it all worthwhile.</p>
               <p>Consequence: (Scene: Kendall and Jan settle into their new home, surrounded by love, warmth, and the fruits of their shared navigation. The space becomes a sanctuary where their love flourishes, creating lasting memories and a solid foundation for their future together. Kendall feels a deep sense of fulfillment, knowing they were able to provide a great place for their shared happiness to thrive.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
             </div>
           );
           
@@ -262,6 +334,7 @@ const Game = () => {
               <p>Jan: (supportive) Kendall, it's okay. Finding a home can be challenging, but we're in this together. Let's not get disheartened.</p>
               <p>Kendall: (reflective) Jan, I appreciate your understanding. I've realized that my navigation skills alone may not be enough. We should approach this as a team and seek professional guidance to find the perfect place.</p>
               <p>Consequence: (Scene: Kendall and Jan regroup, seeking assistance from a real estate agent. Through their joint effort and the support they provide each other, they eventually find a suitable home. Kendall learns the importance of relying on others and working together, leading to a stronger bond and a sense of shared responsibility in their journey.)</p>
+              <button onClick={() => handleChoice("Ending")}>Ending</button>
             </div>
           );          
         }
@@ -303,4 +376,4 @@ const Game = () => {
 
   // export default Game;
 
-export default Game;
+  export default Game;

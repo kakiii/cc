@@ -66,4 +66,10 @@ export const useEmotion = (): [string, React.Dispatch<React.SetStateAction<strin
   return [emotion, setEmotion];
 };
 
+export const useGeneratedJSON = (): [string, React.Dispatch<React.SetStateAction<string>>] => {
+  const [generatedJSON, setGeneratedJSON] = useState("");
+
+  return [generatedJSON, setGeneratedJSON];
+}
+
 export default JSONGenerator;
