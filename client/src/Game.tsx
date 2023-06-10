@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  useUserId,
-  useContextId,
-  useOption,
-  useUserRationale,
-  useAiResponse,
-  useEmotion,
-  useGeneratedJSON
-} from "./JSONGenerator";
+
 /**
  * This is the main component of the game. It is the entry point for the game.import { useUserId, useContextId, useOption, useUserRationale, useAiResponse, useEmotion } from "./JSONGenerator";
 
@@ -17,23 +9,74 @@ import Form from "./Form";
 
 
 const Game = () => {
+// program to generate random strings
 
-  const [userId, setUserId] = useUserId();
+// declare all characters
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length:number) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+  const [userId, setUserId] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
   const [showEndingPage, setShowEndingPage] = useState(false);
-  const [history, setHistory] = useState<string[][]>([]);
+  //const [history, setHistory] = useState<{ option: string; rationale: string; emotion: string; }[]>([]);
   const [rationale, setRationale] = useState("");
   const [emotion, setEmotion] = useState("");
+  const [history, setHistory] = useState<{
+    userid: number;
+    context_id: number;
+    division: Record<string, {
+      Option: string;
+      user_rationale: string;
+      ai_response: string;
+      emotion: string;
+    }>;
+  }>({
+    userid: 21312313,
+    context_id: 1,
+    division: {},
+  });
   
+
   const handleChoice = (choice: string, rationale:string, emotion: string): void => {
     //const newScene: string = scene;
     const newResult: string = `${scene}+${choice}`;
-    setResult(newResult);
-    setHistory((prevHistory: string[][]) => [...prevHistory, [newResult, rationale, emotion]]);
-    
-    
+    //setResult(newResult);
+
+      /**setHistory((prevHistory) => [
+      ...prevHistory,
+      {
+        option: newResult,
+        rationale: rationale,
+        emotion: emotion,
+      },
+    ]);*/
+    setHistory((prevHistory) => {
+      const divId = `div${Object.keys(prevHistory.division).length + 1}`;
+      return {
+        ...prevHistory,
+        division: {
+          ...prevHistory.division,
+          [divId]: {
+            Option: choice,
+            user_rationale: rationale,
+            ai_response: aiResponse,
+            emotion: emotion,
+          },
+        },
+      };
+    });
 
     if (scene == "Begin" && choice === "In Love") {
       setResult(newResult);
