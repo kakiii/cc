@@ -1,4 +1,3 @@
-
 # Project Name
 
 This is a project that combines a React frontend with an Express backend.
@@ -60,6 +59,8 @@ Contributions are welcome! If you encounter any issues or have suggestions, plea
 ## License
 
 [MIT](LICENSE)
+
 ```
 
 Feel free to copy and paste this Markdown text into your README file and modify it as needed.
+```
