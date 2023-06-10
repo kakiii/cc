@@ -1,31 +1,7 @@
-import { useState } from "react";
-
-/**
- * This is the main component of the game. It is the entry point for the game.import { useUserId, useContextId, useOption, useUserRationale, useAiResponse, useEmotion } from "./JSONGenerator";
-
-/**
-import Form from "./Form";
-*/
-
+import { useState , useEffect} from "react";
 
 const Game = () => {
-// program to generate random strings
 
-// declare all characters
-//const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-// function generateString(length:number) {
-//     let result = ' ';
-//     const charactersLength = characters.length;
-//     for ( let i = 0; i < length; i++ ) {
-//         result += characters.charAt(Math.floor(Math.random() * charactersLength));
-//     }
-
-//     return result;
-// }
-
-  //const [userId, setUserId] = useState("");
-  //const [aiResponse, setAiResponse] = useState("");
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -33,6 +9,7 @@ const Game = () => {
   //const [history, setHistory] = useState<{ option: string; rationale: string; emotion: string; }[]>([]);
   const [rationale, setRationale] = useState("");
   const [emotion, setEmotion] = useState("");
+  const [apiResponse, setApiResponse] = useState("");
   const [history, setHistory] = useState<{
     userid: number;
     context_id: number;
@@ -47,7 +24,23 @@ const Game = () => {
     context_id: 1,
     division: {},
   });
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/chatgpt/hello');
+        if (response.ok) {
+          const data = await response.json();
+          setApiResponse(data);
+        } else {
+          throw new Error('Request failed with status ' + response.status);
+        }
+      } catch (error) {
+        console.error('Error while fetching API response:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   
   const handleChoice = (choice: string, rationale:string, emotion: string): void => {
     //const newScene: string = scene;
@@ -217,6 +210,8 @@ const Game = () => {
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('In Love',rationale,emotion)}>A: In love</button>
               <button onClick={() => handleChoice('Angry',rationale,emotion)}>B: Angry</button>
+              {/* {Render The apiResponse} */}
+              <textarea value = {apiResponse} style ={{width:"500px", height:"300px"}} />
             </div>
           );
           }
