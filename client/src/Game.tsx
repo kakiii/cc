@@ -120,27 +120,33 @@ function generateString(length:number) {
     }
     else if (scene == "Ignored") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
     }
     else if (scene == "Loved_Talk To Jan") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
     }
     else if (scene == "Loved_Clean Her Home") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
     }
     else if (scene == "Detached") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
     }
     else if (scene == "Jan Gets Better") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
 
     }
     else if (scene == "Appreciates") {
       setGameEnded(true);
+      sendHistoryToEndpoint();
       setShowEndingPage(true);
       
     }
@@ -157,10 +163,28 @@ function generateString(length:number) {
         }
       };*/
 
-      const sendToBackEnd = () => {
-        setRationale(rationale)
-        setEmotion(emotion)
-      }
+      const sendHistoryToEndpoint = () => {
+        fetch('/db/data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(history),
+        })
+          .then((response) => {
+            if (response.ok) {
+              prompt('History sent successfully');
+              console.log('History sent successfully');
+            } else {
+              prompt('Failed to send history');
+              console.log('Failed to send history');
+            }
+          })
+          .catch((error) => {
+            console.error('Error while sending history:', error);
+          });
+      };
+      
       const downloadHistory = () => {
         const element = document.createElement("a");
         const file = new Blob([JSON.stringify(history, null, 2)], {
@@ -188,8 +212,8 @@ function generateString(length:number) {
               style={{backgroundImage: "image/bg cafe.PNG"}}
               >
               </div>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)}/>
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('In Love',rationale,emotion)}>A: In love</button>
               <button onClick={() => handleChoice('Angry',rationale,emotion)}>B: Angry</button>
@@ -206,8 +230,8 @@ function generateString(length:number) {
               <p>Kendall: (thinking) I wonder if Jan has found a date for the upcoming dance. I should go and talk to her about it.</p>
 
               <p>What will Kendall want to do next?</p>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)}/>
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Talk To Jan',rationale,emotion)}>A: Talk to Jan</button>
               <button onClick={() => handleChoice('Clean Her Home',rationale,emotion)}>B: Clean her home</button>
@@ -227,8 +251,8 @@ function generateString(length:number) {
               <p>(Scene: Jan faints in Kendall's arms, causing concern and worry.)</p>
 
               <p>What will happen to Jan?</p>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)}/>
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Jan Gets Better',rationale,emotion)}>A: Jan will get better</button>
               <button onClick={() => handleChoice('Appreciates',rationale,emotion)}>C: Jan appreciates what Kendall does</button>
@@ -248,8 +272,8 @@ function generateString(length:number) {
               <p>(Kendall tries to pull Jan’s covers over her body)</p>
 
               <p>How would Jan feel as a result?</p>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)}/>
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Ignored',rationale,emotion)}>A: Being Ignored</button>
               <button onClick={() => handleChoice('Loved_Talk To Jan',rationale,emotion)}>B: Being Loved</button>
@@ -269,8 +293,8 @@ function generateString(length:number) {
               <p>Kendall: I have to find a bigger home for us so we can live comfortably.</p>
               <p>(Kendall finds a big villa that is suitable for both him and Jen)</p>
               <p>How will Kendall feel?</p>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
-              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)}/>
+              <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)}/>
               {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Loved_Clean Her Home',rationale,emotion)}>A: Being Loved</button>
               <button onClick={() => handleChoice('Detached',rationale,emotion)}>B: Detached</button>
