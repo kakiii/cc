@@ -190,7 +190,7 @@ function generateString(length:number) {
               </div>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
-              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
+              {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('In Love',rationale,emotion)}>A: In love</button>
               <button onClick={() => handleChoice('Angry',rationale,emotion)}>B: Angry</button>
             </div>
@@ -208,7 +208,7 @@ function generateString(length:number) {
               <p>What will Kendall want to do next?</p>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
-              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
+              {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Talk To Jan',rationale,emotion)}>A: Talk to Jan</button>
               <button onClick={() => handleChoice('Clean Her Home',rationale,emotion)}>B: Clean her home</button>
 
@@ -229,7 +229,7 @@ function generateString(length:number) {
               <p>What will happen to Jan?</p>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
-              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
+              {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Jan Gets Better',rationale,emotion)}>A: Jan will get better</button>
               <button onClick={() => handleChoice('Appreciates',rationale,emotion)}>C: Jan appreciates what Kendall does</button>
 
@@ -250,7 +250,7 @@ function generateString(length:number) {
               <p>How would Jan feel as a result?</p>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
-              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
+              {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Ignored',rationale,emotion)}>A: Being Ignored</button>
               <button onClick={() => handleChoice('Loved_Talk To Jan',rationale,emotion)}>B: Being Loved</button>
 
@@ -271,7 +271,7 @@ function generateString(length:number) {
               <p>How will Kendall feel?</p>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your emotion" value={emotion} onChange={(e) => setEmotion(e.target.value)}/>
               <textarea style = {{width:"500px", height:"300px"}} placeholder="Please write down your rationale" value={rationale} onChange={(e) => setRationale(e.target.value)}/>
-              <button type="submit" onClick={() => sendToBackEnd()}>Submit</button>
+              {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
               <button onClick={() => handleChoice('Loved_Clean Her Home',rationale,emotion)}>A: Being Loved</button>
               <button onClick={() => handleChoice('Detached',rationale,emotion)}>B: Detached</button>
 
