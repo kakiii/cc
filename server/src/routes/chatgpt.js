@@ -4,13 +4,13 @@ const openai = require('openai');
 
 openai.apiKey = process.env.OPENAI_SECRET_KEY;
 
-router.post('/', async (req, res) => {
+router.post('/hello', async (req, res) => {
     const inputMessage = req.body.message;
     try {
         const gptResponse = await openai.Completion.create({
-            engine: "text-davinci-002",
+            engine: "gpt-3.5-turbo",
             prompt: inputMessage,
-            max_tokens: 60
+            max_tokens: 100
         });
 
         const outputMessage = gptResponse.data.choices[0].text;
