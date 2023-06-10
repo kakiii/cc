@@ -27,26 +27,32 @@ const cc_db = client.db("crowd-computing");
 const user = cc_db.collection("user");
 
 router.post("/data", (req, res) => {
-  const data = req.body;
-  // const data_json = JSON.stringify(data);
-  console.log(data);
-  try {
-    user.insertOne(data);
-    data['status'] = 'success';
-    res.json(data).status(200);
+  const contentType = req.headers["content-type"];
+  if (contentType !== "application/json") {
+    return res.status(400).json({ error: "Only application/json content type is allowed" });
   }
-    catch(err){
-        console.log(err);
-        res.sendStatus(500);
-    }
 
+  const data = req.body;
+  console.log(data);
 
+  try {
+    JSON.parse(JSON.stringify(data)); // Check if data is in JSON format
+
+    // Proceed with further processing
+    user.insertOne(data);
+    res.json(data).status(200);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ error: "Invalid JSON format" });
+  }
 });
+
+
 
 router.get("/data", (req, res) => {
     try{
         const data = user.find();
-        res.json(data).status(200);
+        res.json({data}).status(200);
 
     }catch{
         console.log(err);
