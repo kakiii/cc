@@ -8,7 +8,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-router.post('/hello', async (req, res) => {
+/* router.post('/hello', async (req, res) => {
     const inputMessage = req.body.message;
     try {
         const gptResponse = await openai.createChatCompletion({
@@ -33,10 +33,10 @@ router.post('/hello', async (req, res) => {
         }
         res.status(500).json({ error: "An error occurred when trying to communicate with GPT-3" });
     }
-});
+}); */
 
 router.get('/hello', (req, res) => {
-    res.send('Hello World!');
+    res.json({ message: "Hello World!" });
 });
 
 module.exports = router;
