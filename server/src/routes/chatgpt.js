@@ -1,42 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { Configuration, OpenAIApi } = require('openai');
-require('dotenv').config();
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
+
+// Read the JSON file
+const baseline = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../../resources/baseline.json"), "utf8")
+);
+
+router.get("/response", (req, res) => {
+  const scene = req.query.scene;
+  const choice = req.query.choice;
+
+  let currentScene = baseline[scene];
+
+  if (!currentScene || !currentScene[choice]) {
+    return res.status(404).json({ error: "Scene or choice not found" });
+  }
+
+  return res.json({ content: currentScene[choice] });
 });
-const openai = new OpenAIApi(configuration);
 
-/* router.post('/hello', async (req, res) => {
-    const inputMessage = req.body.message;
-    try {
-        const gptResponse = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            max_tokens: 100,
-            messages: [
-                {
-                    role:"user",
-                    content: inputMessage,
-                }]
-        });
+module.exports = router;
 
-        const outputMessage = gptResponse.data.choices[0].message;
-        res.json({ message: outputMessage });
-    } catch (err) {
-        console.error(err);
-        if (err.response) {
-            console.log(err.response.status);
-            console.log(err.response.data);
-        } else {
-            console.log(err.message);
-        }
-        res.status(500).json({ error: "An error occurred when trying to communicate with GPT-3" });
-    }
-}); */
-
-router.get('/hello', (req, res) => {
-    res.json({ message: "Hello World!" });
+router.get("/hello", (req, res) => {
+  res.json({ message: "Hello World!" });
 });
 
 module.exports = router;
