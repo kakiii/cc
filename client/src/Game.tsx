@@ -48,7 +48,7 @@ function generateString(length:number) {
     division: {},
   });
   
-
+  
   const handleChoice = (choice: string, rationale:string, emotion: string): void => {
     //const newScene: string = scene;
     const newResult: string = `${scene}+${choice}`;
