@@ -27,8 +27,8 @@ const Game = () => {
     else if (scene == "Begin" && choice == "Angry") {
       setScene("Angry");
     }
-    else if (scene == "In Love" && choice == "Talk To Jam") {
-      setScene("Talk To Jam");
+    else if (scene == "In Love" && choice == "Talk To Jan") {
+      setScene("Talk To Jan");
     }
     else if (scene == "In Love" && choice == "Clean Her Home") {
       setScene("Clean Her Home");
@@ -39,10 +39,10 @@ const Game = () => {
     else if (scene == "Angry" && choice == "Appreciates") {
       setScene("Appreciates");
     }
-    else if (scene == "Talk To Jam" && choice == "Ignored") {
+    else if (scene == "Talk To Jan" && choice == "Ignored") {
       setScene("Ignored");
     }
-    else if (scene == "Talk To Jam" && choice == "Loved_Talk To Jan") {
+    else if (scene == "Talk To Jan" && choice == "Loved_Talk To Jan") {
       setScene("Loved_Talk To Jan");
     }
     else if (scene == "Clean Her Home" && choice == "Loved_Clean Her Home") {
@@ -108,10 +108,9 @@ const Game = () => {
             <div>
               <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
               <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
-              <p>Part X:</p>
               <p>How would Kendall feel about this?</p>
-              <button onClick={() => handleChoice('In Love')}>A: in love</button>
-              <button onClick={() => handleChoice('Angry')}>B: angry</button>
+              <button onClick={() => handleChoice('In Love')}>A: In love</button>
+              <button onClick={() => handleChoice('Angry')}>B: Angry</button>
             </div>
           );
         }
@@ -123,7 +122,7 @@ const Game = () => {
               <p>(Kendall stands up to do the dishes while Jan goes into her room. Some time passes)</p>
               <p>(Scene: Kendall is in the kitchen, pondering his next move.)</p>
               <p>Kendall: (thinking) I wonder if Jan has found a date for the upcoming dance. I should go and talk to her about it.</p>
-              <p>Part 1 in Part X:</p>
+
               <p>What will Kendall want to do next?</p>
               <button onClick={() => handleChoice('Talk To Jan')}>A: Talk to Jan</button>
               <button onClick={() => handleChoice('Clean Her Home')}>B: Clean her home</button>
@@ -140,7 +139,7 @@ const Game = () => {
               <p>Kendall: (frustrated) Reservations? After all this time together? What's holding you back?</p>
               <p>Jan: (taking a deep breath) Kendall, it's not about you. I've been hurt in the past, and it's made it difficult for me to fully open up and trust someone again.</p>
               <p>(Scene: Jan faints in Kendall's arms, causing concern and worry.)</p>
-              <p>Part ii:</p>
+
               <p>What will happen to Jan?</p>
               <button onClick={() => handleChoice('Jan Gets Better')}>A: Jan will get better</button>
               <button onClick={() => handleChoice('Appreciates')}>C: Jan appreciates what Kendall does</button>
@@ -157,10 +156,10 @@ const Game = () => {
               <p>(Scene: Kendall enters Jan's room, noticing she is sleeping on her stomach.)</p>
               <p>Kendall: (softly) Jan looks so peaceful sleeping like that. I want to make sure she stays warm.</p>
               <p>(Kendall tries to pull Jan’s covers over her body)</p>
-              <p>Part i in 1 in X:</p>
+
               <p>How would Jan feel as a result?</p>
-              <button onClick={() => handleChoice('Ignored')}>A: Ignored</button>
-              <button onClick={() => handleChoice('Loved_Talk To Jan')}>B: Loved</button>
+              <button onClick={() => handleChoice('Ignored')}>A: Being Ignored</button>
+              <button onClick={() => handleChoice('Loved_Talk To Jan')}>B: Being Loved</button>
             </div>
           );
           
@@ -176,7 +175,7 @@ const Game = () => {
               <p>Kendall: I have to find a bigger home for us so we can live comfortably.</p>
               <p>(Kendall finds a big villa that is suitable for both him and Jen)</p>
               <p>How will Kendall feel?</p>
-              <button onClick={() => handleChoice('Loved_Clean Her Home')}>A: Love</button>
+              <button onClick={() => handleChoice('Loved_Clean Her Home')}>A: Being Loved</button>
               <button onClick={() => handleChoice('Detached')}>B: Detached</button>
             </div>
           );
