@@ -12,20 +12,20 @@ const Game = () => {
 // program to generate random strings
 
 // declare all characters
-const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-function generateString(length:number) {
-    let result = ' ';
-    const charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
+// function generateString(length:number) {
+//     let result = ' ';
+//     const charactersLength = characters.length;
+//     for ( let i = 0; i < length; i++ ) {
+//         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//     }
 
-    return result;
-}
+//     return result;
+// }
 
-  const [userId, setUserId] = useState("");
-  const [aiResponse, setAiResponse] = useState("");
+  //const [userId, setUserId] = useState("");
+  //const [aiResponse, setAiResponse] = useState("");
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -39,7 +39,7 @@ function generateString(length:number) {
     division: Record<string, {
       Option: string;
       user_rationale: string;
-      ai_response: string;
+      //ai_response: string;
       emotion: string;
     }>;
   }>({
@@ -71,7 +71,7 @@ function generateString(length:number) {
           [divId]: {
             Option: choice,
             user_rationale: rationale,
-            ai_response: aiResponse,
+            //ai_response: aiResponse,
             emotion: emotion,
           },
         },
