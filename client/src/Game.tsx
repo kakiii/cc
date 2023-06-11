@@ -1,7 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Game = () => {
-
+  function sceneTranslate(scene: string): string {
+    const sceneMap: Record<string, string> = {
+      "Begin": "1",
+      "In Love": "2",
+      "Angry": "5",
+      "Talk To Jan": "3",
+      "Clean Her Home": "4",
+    };
+  
+    return sceneMap[scene] || "";
+  };
+  
+  // function optionTranslate(choice: string): string {
+  //   const optionMap: Record<string, string> = {
+  //     "In Love": "A",
+  //     "Angry": "B",
+  //     "Talk To Jan": "A",
+  //     "Clean Her Home": "B",
+  //     "Jan Gets Better": "A",
+  //     "Appreciates": "B",
+  //     "Loved_Talk To Jan": "B",
+  //     "Loved_Clean Her Home": "A",
+  //     "Ignored": "A",
+  //     "Detached": "B",
+  //   };
+  
+  //   return optionMap[choice] || "";
+  // };
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -24,44 +51,43 @@ const Game = () => {
     context_id: 1,
     division: {},
   });
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/chatgpt/hello');
-        if (response.ok) {
-          const data = await response.json();
-          const message = data.message.trim();
-          setApiResponse(JSON.stringify(message)); // Convert the object to a JSON string
-        } else {
-          throw new Error('Request failed with status ' + response.status);
-        }
-      } catch (error) {
-        console.error('Error when fetching API response:', error);
+
+  const handleApiResponse = async (scene: string, choice: string): Promise<void> => {
+    try {
+      const queryParams = new URLSearchParams({
+        scene: sceneTranslate(scene),
+        choice: choice,
+      });
+  
+      const response = await fetch(`/chatgpt/response?${queryParams}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log('Request succeeded with JSON response', response);
+        const data = await response.json();
+        const message = data.message;
+        setApiResponse(JSON.stringify(message));
+      } else {
+        throw new Error('Request failed with status ' + response.status);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleChoice = (choice: string, rationale: string, emotion: string): void => {
+    } catch (error) {
+      console.error('Error when fetching API response:', error);
+    }
+  };
+  
+  const handleChoice = async (choice: string, rationale: string, emotion: string): Promise<void> => {
     if(!gameEnded){
     if(rationale.length==0 || emotion.length==0){
       alert("Please fill in all the fields");
       return; 
     }
   }
-    //const newScene: string = scene;
-    const newResult: string = `${scene}+${choice}`;
-    //setResult(newResult);
+  const newResult: string = `${scene}+${choice}`;
 
-    /**setHistory((prevHistory) => [
-    ...prevHistory,
-    {
-      option: newResult,
-      rationale: rationale,
-      emotion: emotion,
-    },
-  ]);*/
     setHistory((prevHistory) => {
       const divId = `div${Object.keys(prevHistory.division).length + 1}`;
       return {
@@ -227,7 +253,9 @@ const Game = () => {
             <button onClick={() => handleChoice('In Love', rationale, emotion)}>A: In love</button>
             <button onClick={() => handleChoice('Angry', rationale, emotion)}>B: Angry</button>
             {/* {Render The apiResponse} */}
-            <textarea value={apiResponse} style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
       }
