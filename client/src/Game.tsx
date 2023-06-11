@@ -70,7 +70,7 @@ const Game = () => {
         console.log('Request succeeded with JSON response', response);
         const data = await response.json();
         // console.log(content);
-        setApiResponse(JSON.stringify(data.content.rationale));
+        setApiResponse(decodeURIComponent(data.content.rationale));
       } else {
         throw new Error('Request failed with status ' + response.status);
       }
