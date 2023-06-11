@@ -70,7 +70,7 @@ const Game = () => {
         console.log('Request succeeded with JSON response', response);
         const data = await response.json();
         // console.log(content);
-        setApiResponse(JSON.stringify(data.content.rationale));
+        setApiResponse(JSON.stringify(data.content.rationale.replace(/[\r\n"]/g, '')));
       } else {
         throw new Error('Request failed with status ' + response.status);
       }
@@ -274,7 +274,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Talk To Jan', rationale, emotion)}>A: Talk to Jan</button>
             <button onClick={() => handleChoice('Clean Her Home', rationale, emotion)}>B: Clean her home</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
       }
@@ -295,7 +298,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Jan Gets Better', rationale, emotion)}>A: Jan will get better</button>
             <button onClick={() => handleChoice('Appreciates', rationale, emotion)}>C: Jan appreciates what Kendall does</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -316,7 +322,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Ignored', rationale, emotion)}>A: Being Ignored</button>
             <button onClick={() => handleChoice('Loved_Talk To Jan', rationale, emotion)}>B: Being Loved</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -337,7 +346,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Loved_Clean Her Home', rationale, emotion)}>A: Being Loved</button>
             <button onClick={() => handleChoice('Detached', rationale, emotion)}>B: Detached</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -356,7 +368,10 @@ const Game = () => {
             <p>Kendall: (grateful) Jan, I'm here for you, and I want us to grow together. Let's work through any challenges that come our way and create a future filled with love and happiness.</p>
             <p>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
