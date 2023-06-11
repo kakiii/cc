@@ -21,30 +21,31 @@ This is a project that combines a React frontend with an Express backend.
    cd cc
    ```
 
-3. Install dependencies for both the server and the client:
+3. Install dependencies for both the **server** and the **client**:
 
    ```bash
    npm install
    ```
 
-4. Start the server:
+4. Start the server, remember you cannot do **node index.js** inside **src** folder, it must be done outside:
 
    ```bash
-   node server/server.js
+   node server/src/index.js
    ```
 
-   The server will start running at `http://localhost:5000`.
+   The server will start running at `http://localhost:8080`.
 
 5. Build the React app:
 
    ```bash
    cd client
    npm run build
+   npm run dev
    ```
-
+**npm run dev** can reload the app without rebuilding the app
 6. Access the application:
 
-   Open your web browser and visit `http://localhost:5000` to access the application.
+   Open your web browser and visit `http://localhost:5173` to access the application.
 
 ## Usage
 
