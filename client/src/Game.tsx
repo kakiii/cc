@@ -28,7 +28,7 @@ const Game = () => {
     division: Record<string, {
       Option: string;
       user_rationale: string;
-      api_response: string;
+      //api_response: string;
       emotion: string;
     }>;
   }>({
@@ -82,8 +82,8 @@ const Game = () => {
           [divId]: {
             Option: choice,
             user_rationale: rationale,
-            api_response: apiResponse,
-            emotion: emotion,
+            //api_response: apiResponse,
+            emotion: emotion
           },
         },
       };
