@@ -1,0 +1,21 @@
+.scene.begin {
+    background-image: url("../images/bg cafe.PNG");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+.scene.in-love {
+background-image: url("");
+}
+
+.scene.angry {
+background-image: url("path_to_angry_image.jpg");
+}
+
+.scene.talk-to-jan {
+background-image: url("path_to_talk_to_jan_image.jpg");
+}
+
+.scene.clean-her-home {
+background-image: url("path_to_clean_her_home_image.jpg");
+}

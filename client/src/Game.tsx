@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./scene.css"
 const Game = () => {
   function sceneTranslate(scene: string): string {
     const sceneMap: Record<string, string> = {
@@ -12,23 +12,7 @@ const Game = () => {
   
     return sceneMap[scene] || "";
   };
-  
-  // function optionTranslate(choice: string): string {
-  //   const optionMap: Record<string, string> = {
-  //     "In Love": "A",
-  //     "Angry": "B",
-  //     "Talk To Jan": "A",
-  //     "Clean Her Home": "B",
-  //     "Jan Gets Better": "A",
-  //     "Appreciates": "B",
-  //     "Loved_Talk To Jan": "B",
-  //     "Loved_Clean Her Home": "A",
-  //     "Ignored": "A",
-  //     "Detached": "B",
-  //   };
-  
-  //   return optionMap[choice] || "";
-  // };
+
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -43,7 +27,7 @@ const Game = () => {
     division: Record<string, {
       Option: string;
       user_rationale: string;
-      //ai_response: string;
+      api_response: string;
       emotion: string;
     }>;
   }>({
@@ -97,7 +81,7 @@ const Game = () => {
           [divId]: {
             Option: choice,
             user_rationale: rationale,
-            //ai_response: aiResponse,
+            api_response: apiResponse,
             emotion: emotion,
           },
         },
@@ -240,6 +224,7 @@ const Game = () => {
       case "Begin": {
         return (
           <div>
+            <div style={{backgroundImage: "../image/bg\ cafe.PNG"}}>a</div>
             <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p>How would Kendall feel about this?</p>
