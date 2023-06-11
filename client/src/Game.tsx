@@ -1,5 +1,5 @@
 import { useState } from "react";
-import cafe from "/images/bg cafe.jpg";
+
 //import "./scene.css"
 const Game = () => {
   function sceneTranslate(scene: string): string {
@@ -90,47 +90,57 @@ const Game = () => {
     });
 
     if (scene == "Begin" && choice === "In Love") {
+      setApiResponse("");
       setResult(newResult);
       setScene("In Love");
     }
     else if (scene == "Begin" && choice == "Angry") {
+      setApiResponse("");
       setResult(newResult);
       setScene("Angry");
     }
     else if (scene == "In Love" && choice == "Talk To Jan") {
+      setApiResponse("");
       setResult(newResult);
       setScene("Talk To Jan");
     }
     else if (scene == "In Love" && choice == "Clean Her Home") {
+      setApiResponse("");
       setResult(newResult);
       setScene("Clean Her Home");
     }
     else if (scene == "Angry" && choice == "Jan Gets Better") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Jan Gets Better");
     }
     else if (scene == "Angry" && choice == "Appreciates") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Appreciates");
     }
     else if (scene == "Talk To Jan" && choice == "Ignored") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Ignored");
     }
     else if (scene == "Talk To Jan" && choice == "Loved_Talk To Jan") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Talk To Jan");
     }
     else if (scene == "Clean Her Home" && choice == "Loved_Clean Her Home") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Clean Her Home");
     }
     else if (scene == "Clean Her Home" && choice == "Detached") {
+      setApiResponse("");
       setGameEnded(true);
       setResult(newResult);
       setScene("Detached");
@@ -226,19 +236,20 @@ const Game = () => {
         return (
           <div>
             {/* <img src="/bg cafe.jpg" /> */}
-            <div className="scene_begin" style={{ backgroundImage: `url("images/bg cafe.jpg")`, height:`500px`,}}>a</div>
-            <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
-            <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
-            <p>How would Kendall feel about this?</p>
+            <div className="scene_begin" style={{ backgroundImage: `url("images/bg cafe.jpg")`, height:`500px`, backgroundSize:"contain", backgroundRepeat:"no-repeat"}}>a</div>  
+            <p><h3>Kendall:</h3> (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
+            <p><h3>Jan:</h3> (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
+            <p><h4>How would Kendall feel about this?</h4></p>
             <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required />
             <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('In Love', rationale, emotion)}>A: In love</button>
             <button onClick={() => handleChoice('Angry', rationale, emotion)}>B: Angry</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
       }
@@ -258,9 +269,10 @@ const Game = () => {
             <button onClick={() => handleChoice('Talk To Jan', rationale, emotion)}>A: Talk to Jan</button>
             <button onClick={() => handleChoice('Clean Her Home', rationale, emotion)}>B: Clean her home</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
       }
@@ -282,9 +294,10 @@ const Game = () => {
             <button onClick={() => handleChoice('Jan Gets Better', rationale, emotion)}>A: Jan will get better</button>
             <button onClick={() => handleChoice('Appreciates', rationale, emotion)}>C: Jan appreciates what Kendall does</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
 
@@ -306,9 +319,10 @@ const Game = () => {
             <button onClick={() => handleChoice('Ignored', rationale, emotion)}>A: Being Ignored</button>
             <button onClick={() => handleChoice('Loved_Talk To Jan', rationale, emotion)}>B: Being Loved</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
 
@@ -330,9 +344,10 @@ const Game = () => {
             <button onClick={() => handleChoice('Loved_Clean Her Home', rationale, emotion)}>A: Being Loved</button>
             <button onClick={() => handleChoice('Detached', rationale, emotion)}>B: Detached</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
 
@@ -352,9 +367,10 @@ const Game = () => {
             <p>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
             {/* {Render The apiResponse} */}
-            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
-            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <br></br>
             <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>AI Rationale of A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>AI Rationale of B</button>
           </div>
         );
 
