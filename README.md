@@ -5,7 +5,7 @@ This is a project that combines a React frontend with an Express backend.
 ## Prerequisites
 
 - Node.js (version 18 or higher)
-- MongoDB (Not yet implmented)
+- MongoDB 
 
 ## Getting Started
 
