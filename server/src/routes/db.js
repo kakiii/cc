@@ -38,6 +38,9 @@ router.post("/data", (req, res) => {
   try {
     JSON.parse(JSON.stringify(data)); // Check if data is in JSON format
 
+    // Add a timestamp
+    data.timestamp = new Date();
+
     // Proceed with further processing
     user.insertOne(data);
     res.json(data).status(200);
@@ -46,6 +49,7 @@ router.post("/data", (req, res) => {
     res.status(400).json({ error: "Invalid JSON format" });
   }
 });
+
 
 
 
