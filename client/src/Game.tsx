@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./scene.css"
+//import "./scene.css"
 const Game = () => {
   function sceneTranslate(scene: string): string {
     const sceneMap: Record<string, string> = {
@@ -224,7 +224,7 @@ const Game = () => {
       case "Begin": {
         return (
           <div>
-            <div style={{backgroundImage: "../image/bg\ cafe.PNG"}}>a</div>
+            <div style={{backgroundImage: "../image/bg cafe.PNG"}}>a</div>
             <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p>How would Kendall feel about this?</p>
