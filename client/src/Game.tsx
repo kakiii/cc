@@ -3,7 +3,7 @@ import { useState } from "react";
 //import "./scene.css"
 const Game = () => {
   function generateRandomString(length:number){
-    var userId = Math.floor(Math.random() * length*100)^5;
+    var userId = Math.floor(Math.random() * length*100);
     return userId.toString();
   }
   function sceneTranslate(scene: string): string {
@@ -367,7 +367,7 @@ const Game = () => {
             <p><h3>Kendall:</h3> (gently) You deserve to be cared for, Jan. I want to be the person who supports you and makes you feel loved.</p>
             <p><h3>Jan:</h3> (reflective) I've been guarded because of my past, but your actions and words show me that I can trust you. I want us to continue building our relationship.</p>
             <p><h3>Kendall:</h3> (grateful) Jan, I'm here for you, and I want us to grow together. Let's work through any challenges that come our way and create a future filled with love and happiness.</p>
-            <p>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</p>
+            <p><h4>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</h4></p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
             {/* {Render The apiResponse} */}
             <br></br>
@@ -386,7 +386,7 @@ const Game = () => {
             <p><h3>Jan:</h3> (reflective) I never expected to find someone as caring and understanding as you, Kendall. You've shown me what it means to be loved and supported.</p>
             <p><h3>Kendall:</h3> (tenderly) Jan, you deserve nothing less than love and support. I want to be the one who provides that for you, now and in the future.</p>
             <p><h3>Jan:</h3> (grateful) With you by my side, I feel like I can overcome any challenges that come our way. Together, we can create a beautiful and fulfilling relationship.</p>
-            <p>Consequence: (Scene: Jan's gratitude deepens their bond, and they continue to nurture their relationship with care, understanding, and unconditional love. Their shared appreciation and commitment to each other create a strong foundation, allowing their love to grow and flourish. Kendall's dedication to Jan's happiness fosters a sense of security and happiness, making their relationship a source of joy and fulfillment for both of them.)</p>
+            <p><h4>Consequence: (Scene: Jan's gratitude deepens their bond, and they continue to nurture their relationship with care, understanding, and unconditional love. Their shared appreciation and commitment to each other create a strong foundation, allowing their love to grow and flourish. Kendall's dedication to Jan's happiness fosters a sense of security and happiness, making their relationship a source of joy and fulfillment for both of them.)</h4></p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
           </div>
         );
@@ -403,7 +403,7 @@ const Game = () => {
             <p><h3>Jan:</h3> (sadly) Kendall, it's not just about that one incident. Lately, I've been feeling like our connection has faded. We seem to have different priorities, and our communication has suffered. I think it might be best if we go our separate ways.</p>
             <p><h3>Kendall:</h3> (taken aback) Jan, I didn't realize you felt this way. I'm devastated to hear that you want to end our relationship, but I respect your decision.</p>
             <p><h3>Jan:</h3> (teary-eyed) Kendall, it's not an easy decision for me either. We had some beautiful moments together, but it feels like we've grown apart. It's time for both of us to find our own happiness.</p>
-            <p>Consequence: (Scene: Kendall and Jan mutually agree to end their relationship, acknowledging that their paths have diverged. They part ways with a mix of sadness and gratitude for the time they shared. They cherish the memories they created but understand that it's time to move forward separately. They both embark on new journeys, learning and growing from the experiences they had together.)</p>
+            <p><h4>Consequence: (Scene: Kendall and Jan mutually agree to end their relationship, acknowledging that their paths have diverged. They part ways with a mix of sadness and gratitude for the time they shared. They cherish the memories they created but understand that it's time to move forward separately. They both embark on new journeys, learning and growing from the experiences they had together.)</h4></p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
           </div>
         );
@@ -418,7 +418,7 @@ const Game = () => {
             <p><h3>Jan:</h3> (grateful) Kendall, your thoughtfulness never fails to touch my heart. It's moments like these that remind me how lucky I am to have you in my life.</p>
             <p><h3>Kendall:</h3> (gently takes Jan's hand) Jan, being with you feels like home. You bring so much joy and warmth into my life. I can't imagine my days without you by my side.</p>
             <p><h3>Jan:</h3> (blushing) Kendall, you make me feel cherished and loved. The way you care for me and pay attention to the little details fills me with happiness. I'm grateful for our deep connection.</p>
-            <p>Consequence: (Scene: Kendall and Jan's relationship continues to flourish, filled with love, understanding, and mutual respect. They create a harmonious life together, supporting each other's dreams and aspirations. As time passes, their commitment deepens, and they decide to take their relationship to the next level.)</p>
+            <p><h4>Consequence: (Scene: Kendall and Jan's relationship continues to flourish, filled with love, understanding, and mutual respect. They create a harmonious life together, supporting each other's dreams and aspirations. As time passes, their commitment deepens, and they decide to take their relationship to the next level.)</h4></p>
             <p>(Scene: Kendall and Jan celebrate their engagement, surrounded by love and the promise of a lifelong partnership. They embark on a beautiful journey together, building a life filled with warmth, trust, and unwavering love.)</p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
           </div>
@@ -432,7 +432,7 @@ const Game = () => {
             <p><h3>Kendall:</h3> (looking around with excitement) Jan, we did it! This place is perfect for us. I'm so glad I put our way of navigating into practice.</p>
             <p><h3>Jan:</h3> (beaming) Kendall, I'm amazed at how you found this gem of a home. You truly have a knack for creating a beautiful and comfortable space.</p>
             <p><h3>Kendall:</h3> (feeling loved and accomplished) Jan, your words mean the world to me. I wanted us to have a place we can truly call home, and seeing your happiness makes it all worthwhile.</p>
-            <p>Consequence: (Scene: Kendall and Jan settle into their new home, surrounded by love, warmth, and the fruits of their shared navigation. The space becomes a sanctuary where their love flourishes, creating lasting memories and a solid foundation for their future together. Kendall feels a deep sense of fulfillment, knowing they were able to provide a great place for their shared happiness to thrive.)</p>
+            <p><h4>Consequence: (Scene: Kendall and Jan settle into their new home, surrounded by love, warmth, and the fruits of their shared navigation. The space becomes a sanctuary where their love flourishes, creating lasting memories and a solid foundation for their future together. Kendall feels a deep sense of fulfillment, knowing they were able to provide a great place for their shared happiness to thrive.)</h4></p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
           </div>
         );
@@ -445,7 +445,7 @@ const Game = () => {
             <p><h3>Kendall:</h3> (frustrated and detached) Jan, I thought I could find us a great home, but it's not working out as I hoped. I feel detached from the whole process.</p>
             <p><h3>Jan:</h3> (supportive) Kendall, it's okay. Finding a home can be challenging, but we're in this together. Let's not get disheartened.</p>
             <p><h3>Kendall:</h3> (reflective) Jan, I appreciate your understanding. I've realized that my navigation skills alone may not be enough. We should approach this as a team and seek professional guidance to find the perfect place.</p>
-            <p>Consequence: (Scene: Kendall and Jan regroup, seeking assistance from a real estate agent. Through their joint effort and the support they provide each other, they eventually find a suitable home. Kendall learns the importance of relying on others and working together, leading to a stronger bond and a sense of shared responsibility in their journey.)</p>
+            <p><h4>Consequence: (Scene: Kendall and Jan regroup, seeking assistance from a real estate agent. Through their joint effort and the support they provide each other, they eventually find a suitable home. Kendall learns the importance of relying on others and working together, leading to a stronger bond and a sense of shared responsibility in their journey.)</h4></p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
           </div>
         );
