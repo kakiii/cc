@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cafe from '../images/bg cafe.jpg'
 //import "./scene.css"
 const Game = () => {
   function sceneTranslate(scene: string): string {
@@ -9,7 +10,7 @@ const Game = () => {
       "Talk To Jan": "3",
       "Clean Her Home": "4",
     };
-  
+
     return sceneMap[scene] || "";
   };
 
@@ -42,14 +43,14 @@ const Game = () => {
         scene: sceneTranslate(scene),
         choice: choice,
       });
-  
+
       const response = await fetch(`/chatgpt/response?${queryParams}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (response.ok) {
         console.log('Request succeeded with JSON response', response);
         const data = await response.json();
@@ -62,15 +63,15 @@ const Game = () => {
       console.error('Error when fetching API response:', error);
     }
   };
-  
+
   const handleChoice = async (choice: string, rationale: string, emotion: string): Promise<void> => {
-    if(!gameEnded){
-    if(rationale.length==0 || emotion.length==0){
-      alert("Please fill in all the fields");
-      return; 
+    if (!gameEnded) {
+      if (rationale.length == 0 || emotion.length == 0) {
+        alert("Please fill in all the fields");
+        return;
+      }
     }
-  }
-  const newResult: string = `${scene}+${choice}`;
+    const newResult: string = `${scene}+${choice}`;
 
     setHistory((prevHistory) => {
       const divId = `div${Object.keys(prevHistory.division).length + 1}`;
@@ -224,11 +225,11 @@ const Game = () => {
       case "Begin": {
         return (
           <div>
-            <div style={{backgroundImage: "../images/bg cafe.PNG"}}>a</div>
+            <div className="scene_begin" style={{ backgroundImage: 'url(${cafe})' }}>a</div>
             <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p>How would Kendall feel about this?</p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required  />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required />
             <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('In Love', rationale, emotion)}>A: In love</button>
