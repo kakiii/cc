@@ -243,8 +243,8 @@ const Game = () => {
             <p><h3>Kendall:</h3> (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p><h3>Jan:</h3> (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p><h4>How would Kendall feel about this?</h4></p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required />
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="If you were Kendall, please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale for making the choice" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('In Love', rationale, emotion)}>A: In love</button>
             <button onClick={() => handleChoice('Angry', rationale, emotion)}>B: Angry</button>
@@ -266,8 +266,8 @@ const Game = () => {
             <p><h3>Kendall:</h3> (thinking) I wonder if Jan has found a date for the upcoming dance. I should go and talk to her about it.</p>
 
             <p><h4>What willKendall want to do next?</h4></p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="If you are Kendall, please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale for making the choice" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Talk To Jan', rationale, emotion)}>A: Talk to Jan</button>
             <button onClick={() => handleChoice('Clean Her Home', rationale, emotion)}>B: Clean her home</button>
@@ -291,8 +291,8 @@ const Game = () => {
             <p>(Scene: Jan faints in Kendall's arms, causing concern and worry.)</p>
 
             <p><h4>What will happen to Jan?</h4></p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion, if you were Jan" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale, for making the choice" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Jan Gets Better', rationale, emotion)}>A: Jan will get better</button>
             <button onClick={() => handleChoice('Appreciates', rationale, emotion)}>B: Jan appreciates what Kendall does</button>
@@ -316,8 +316,8 @@ const Game = () => {
             <p>(Kendall tries to pull Jan’s covers over her body)</p>
 
             <p><h4>How would Jan feel as a result?</h4></p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion, if you were Jan" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale for making the choice" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Ignored', rationale, emotion)}>A: Being Ignored</button>
             <button onClick={() => handleChoice('Loved_Talk To Jan', rationale, emotion)}>B: Being Loved</button>
@@ -341,8 +341,8 @@ const Game = () => {
             <p><h3>Kendall:</h3> I have to find a bigger home for us so we can live comfortably.</p>
             <p>(Kendall finds a big villa that is suitable for both him and Jen)</p>
             <p><h4>How will Kendall feel?</h4></p>
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
-            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion, if you were Kendall" defaultValue="" onChange={(e) => setEmotion(e.target.value)} required />
+            <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale for making the choice" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Loved_Clean Her Home', rationale, emotion)}>A: Being Loved</button>
             <button onClick={() => handleChoice('Detached', rationale, emotion)}>B: Detached</button>

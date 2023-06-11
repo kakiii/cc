@@ -42,7 +42,7 @@ This is a project that combines a React frontend with an Express backend.
    npm run build
    npm run dev
    ```
-**npm run dev** can reload the app without rebuilding the app
+- **npm run dev** can reload the app without rebuilding the app
 6. Access the application:
 
    Open your web browser and visit `http://localhost:5173` to access the application.
