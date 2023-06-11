@@ -93,57 +93,57 @@ const Game = () => {
     });
 
     if (scene == "Begin" && choice === "In Love") {
-      setApiResponse("");
+      
       setResult(newResult);
       setScene("In Love");
     }
     else if (scene == "Begin" && choice == "Angry") {
-      setApiResponse("");
+      
       setResult(newResult);
       setScene("Angry");
     }
     else if (scene == "In Love" && choice == "Talk To Jan") {
-      setApiResponse("");
+      
       setResult(newResult);
       setScene("Talk To Jan");
     }
     else if (scene == "In Love" && choice == "Clean Her Home") {
-      setApiResponse("");
+      
       setResult(newResult);
       setScene("Clean Her Home");
     }
     else if (scene == "Angry" && choice == "Jan Gets Better") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Jan Gets Better");
     }
     else if (scene == "Angry" && choice == "Appreciates") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Appreciates");
     }
     else if (scene == "Talk To Jan" && choice == "Ignored") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Ignored");
     }
     else if (scene == "Talk To Jan" && choice == "Loved_Talk To Jan") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Talk To Jan");
     }
     else if (scene == "Clean Her Home" && choice == "Loved_Clean Her Home") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Clean Her Home");
     }
     else if (scene == "Clean Her Home" && choice == "Detached") {
-      setApiResponse("");
+      
       setGameEnded(true);
       setResult(newResult);
       setScene("Detached");
@@ -184,6 +184,7 @@ const Game = () => {
       renderEndingPage();
     }
     //Reset Rationale and Emotion
+    setApiResponse("");
     setRationale("");
     setEmotion("");
   };
