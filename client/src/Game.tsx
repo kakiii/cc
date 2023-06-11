@@ -2,6 +2,10 @@ import { useState } from "react";
 
 //import "./scene.css"
 const Game = () => {
+  function generateRandomString(length:number){
+    var userId = Math.floor(Math.random() * length*100)^5;
+    return userId.toString();
+  }
   function sceneTranslate(scene: string): string {
     const sceneMap: Record<string, string> = {
       "Begin": "1",
@@ -13,7 +17,6 @@ const Game = () => {
 
     return sceneMap[scene] || "";
   };
-
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -23,7 +26,7 @@ const Game = () => {
   const [emotion, setEmotion] = useState("");
   const [apiResponse, setApiResponse] = useState("");
   const [history, setHistory] = useState<{
-    userid: number;
+    userid: string;
     context_id: number;
     division: Record<string, {
       Option: string;
@@ -32,7 +35,7 @@ const Game = () => {
       emotion: string;
     }>;
   }>({
-    userid: 21312313,
+    userid: generateRandomString(10000),
     context_id: 1,
     division: {},
   });
