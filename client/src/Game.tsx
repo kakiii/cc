@@ -69,8 +69,8 @@ const Game = () => {
       if (response.ok) {
         console.log('Request succeeded with JSON response', response);
         const data = await response.json();
-        const message = data.message;
-        setApiResponse(JSON.stringify(message));
+        // console.log(content);
+        setApiResponse(JSON.stringify(data.content.rationale));
       } else {
         throw new Error('Request failed with status ' + response.status);
       }
