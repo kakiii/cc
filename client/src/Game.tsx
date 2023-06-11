@@ -1,5 +1,5 @@
 import { useState } from "react";
-import cafe from '../images/bg cafe.jpg'
+import cafe from "/images/bg cafe.jpg";
 //import "./scene.css"
 const Game = () => {
   function sceneTranslate(scene: string): string {
@@ -225,7 +225,8 @@ const Game = () => {
       case "Begin": {
         return (
           <div>
-            <div className="scene_begin" style={{ backgroundImage: 'url(${cafe})' }}>a</div>
+            {/* <img src="/bg cafe.jpg" /> */}
+            <div className="scene_begin" style={{ backgroundImage: `url("images/bg cafe.jpg")`  }}>a</div>
             <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p>How would Kendall feel about this?</p>
