@@ -228,10 +228,6 @@ const Game = () => {
             <p>Kendall: (smiling affectionately) Jan, these past few months have been incredible. I can't believe how much we've grown together. I think our relationship is getting really serious.</p>
             <p>Jan: (grinning) Kendall, I feel the same way. I've never connected with someone on such a deep level before. It's like we're meant to be.</p>
             <p>How would Kendall feel about this?</p>
-            <div
-              style={{ backgroundImage: "image/bg cafe.PNG" }}
-            >
-            </div>
             <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your emotion" defaultValue="" onChange={(e) => setEmotion(e.target.value)} minLength={250} required  />
             <textarea style={{ width: "500px", height: "300px" }} placeholder="Please write down your rationale" defaultValue="" onChange={(e) => setRationale(e.target.value)} required />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
