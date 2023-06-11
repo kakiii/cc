@@ -49,15 +49,16 @@ router.post("/data", (req, res) => {
 
 
 
-router.get("/data", (req, res) => {
-    try{
-        const data = user.find();
-        res.json({data}).status(200);
+router.get("/data", async (req, res) => {
+  try{
+      const data = await user.find().limit(10).toArray();  // Limit to first 10 documents
+      res.status(200).json({data});
 
-    }catch{
-        console.log(err);
-        res.sendStatus(500);
-    }
+  } catch(err){
+      console.log(err);
+      res.sendStatus(500);
+  }
 });
+
 
 module.exports = router;
