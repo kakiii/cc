@@ -1,7 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const Game = () => {
-
+  function sceneTranslate(scene: string): string {
+    const sceneMap: Record<string, string> = {
+      "Begin": "1",
+      "In Love": "2",
+      "Angry": "5",
+      "Talk To Jan": "3",
+      "Clean Her Home": "4",
+    };
+  
+    return sceneMap[scene] || "";
+  };
+  
+  // function optionTranslate(choice: string): string {
+  //   const optionMap: Record<string, string> = {
+  //     "In Love": "A",
+  //     "Angry": "B",
+  //     "Talk To Jan": "A",
+  //     "Clean Her Home": "B",
+  //     "Jan Gets Better": "A",
+  //     "Appreciates": "B",
+  //     "Loved_Talk To Jan": "B",
+  //     "Loved_Clean Her Home": "A",
+  //     "Ignored": "A",
+  //     "Detached": "B",
+  //   };
+  
+  //   return optionMap[choice] || "";
+  // };
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
   const [gameEnded, setGameEnded] = useState(false);
@@ -24,44 +51,43 @@ const Game = () => {
     context_id: 1,
     division: {},
   });
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/chatgpt/hello');
-        if (response.ok) {
-          const data = await response.json();
-          const message = data.message.trim();
-          setApiResponse(JSON.stringify(message)); // Convert the object to a JSON string
-        } else {
-          throw new Error('Request failed with status ' + response.status);
-        }
-      } catch (error) {
-        console.error('Error when fetching API response:', error);
+
+  const handleApiResponse = async (scene: string, choice: string): Promise<void> => {
+    try {
+      const queryParams = new URLSearchParams({
+        scene: sceneTranslate(scene),
+        choice: choice,
+      });
+  
+      const response = await fetch(`/chatgpt/response?${queryParams}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log('Request succeeded with JSON response', response);
+        const data = await response.json();
+        // console.log(content);
+        setApiResponse(JSON.stringify(data.content.rationale.replace(/[\r\n"]/g, '')));
+      } else {
+        throw new Error('Request failed with status ' + response.status);
       }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleChoice = (choice: string, rationale: string, emotion: string): void => {
+    } catch (error) {
+      console.error('Error when fetching API response:', error);
+    }
+  };
+  
+  const handleChoice = async (choice: string, rationale: string, emotion: string): Promise<void> => {
     if(!gameEnded){
     if(rationale.length==0 || emotion.length==0){
       alert("Please fill in all the fields");
       return; 
     }
   }
-    //const newScene: string = scene;
-    const newResult: string = `${scene}+${choice}`;
-    //setResult(newResult);
+  const newResult: string = `${scene}+${choice}`;
 
-    /**setHistory((prevHistory) => [
-    ...prevHistory,
-    {
-      option: newResult,
-      rationale: rationale,
-      emotion: emotion,
-    },
-  ]);*/
     setHistory((prevHistory) => {
       const divId = `div${Object.keys(prevHistory.division).length + 1}`;
       return {
@@ -227,7 +253,9 @@ const Game = () => {
             <button onClick={() => handleChoice('In Love', rationale, emotion)}>A: In love</button>
             <button onClick={() => handleChoice('Angry', rationale, emotion)}>B: Angry</button>
             {/* {Render The apiResponse} */}
-            <textarea value={apiResponse} style={{ width: "500px", height: "300px" }} />
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
       }
@@ -246,7 +274,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Talk To Jan', rationale, emotion)}>A: Talk to Jan</button>
             <button onClick={() => handleChoice('Clean Her Home', rationale, emotion)}>B: Clean her home</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
       }
@@ -267,7 +298,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Jan Gets Better', rationale, emotion)}>A: Jan will get better</button>
             <button onClick={() => handleChoice('Appreciates', rationale, emotion)}>C: Jan appreciates what Kendall does</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -288,7 +322,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Ignored', rationale, emotion)}>A: Being Ignored</button>
             <button onClick={() => handleChoice('Loved_Talk To Jan', rationale, emotion)}>B: Being Loved</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -309,7 +346,10 @@ const Game = () => {
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button onClick={() => handleChoice('Loved_Clean Her Home', rationale, emotion)}>A: Being Loved</button>
             <button onClick={() => handleChoice('Detached', rationale, emotion)}>B: Detached</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
@@ -328,7 +368,10 @@ const Game = () => {
             <p>Kendall: (grateful) Jan, I'm here for you, and I want us to grow together. Let's work through any challenges that come our way and create a future filled with love and happiness.</p>
             <p>Consequence: (Scene: Jan's appreciation for Kendall's kindness deepens their connection, and they continue to nurture their relationship with care and understanding. The experience strengthens their bond, allowing them to overcome Jan's past reservations and build a loving and trusting partnership.)</p>
             <button onClick={() => handleChoice("Ending", "", "")}>Ending</button>
-
+            {/* {Render The apiResponse} */}
+            <button onClick={() => handleApiResponse(scene, "A")}>A</button>
+            <button onClick={() => handleApiResponse(scene, "B")}>B</button>
+            <textarea value={apiResponse} readOnly style={{ width: "500px", height: "300px" }} />
           </div>
         );
 
