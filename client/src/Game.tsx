@@ -109,79 +109,77 @@ const Game = () => {
       };
     });
 
-    if (scene == "Begin" && choice === "In Love") {
-
-      setResult(newResult);
-      setScene("In Love");
-    } else if (scene == "Begin" && choice == "Angry") {
-
-      setResult(newResult);
-      setScene("Angry");
-    } else if (scene == "In Love" && choice == "Talk To Jan") {
-
-      setResult(newResult);
-      setScene("Talk To Jan");
-    } else if (scene == "In Love" && choice == "Clean Her Home") {
-
-      setResult(newResult);
-      setScene("Clean Her Home");
-    } else if (scene == "Angry" && choice == "Jan Gets Better") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Jan Gets Better");
-    } else if (scene == "Angry" && choice == "Appreciates") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Appreciates");
-    } else if (scene == "Talk To Jan" && choice == "Ignored") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Ignored");
-    } else if (scene == "Talk To Jan" && choice == "Loved_Talk To Jan") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Loved_Talk To Jan");
-    } else if (scene == "Clean Her Home" && choice == "Loved_Clean Her Home") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Loved_Clean Her Home");
-    } else if (scene == "Clean Her Home" && choice == "Detached") {
-
-      setGameEnded(true);
-      setResult(newResult);
-      setScene("Detached");
-    } else if (scene == "Ignored") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Loved_Talk To Jan") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Loved_Clean Her Home") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Detached") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Jan Gets Better") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Appreciates") {
-      setGameEnded(true);
-      sendHistoryToEndpoint();
-      setShowEndingPage(true);
-    } else if (scene == "Ending") {
-      renderEndingPage();
+    switch (scene) {
+      case "Begin":
+        if (choice === "In Love") {
+          setScene("In Love");
+        } else if (choice === "Angry") {
+          setScene("Angry");
+        }
+        break;
+      case "In Love":
+        if (choice === "Talk To Jan") {
+          setScene("Talk To Jan");
+        } else if (choice === "Clean Her Home") {
+          setScene("Clean Her Home");
+        }
+        break;
+      case "Angry":
+        if (choice === "Jan Gets Better") {
+          setScene("Jan Gets Better");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        } else if (choice === "Appreciates") {
+          setScene("Appreciates");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        }
+        break;
+      case "Talk To Jan":
+        if (choice === "Ignored") {
+          setScene("Ignored");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        } else if (choice === "Loved_Talk To Jan") {
+          setScene("Loved_Talk To Jan");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        }
+        break;
+      case "Clean Her Home":
+        if (choice === "Loved_Clean Her Home") {
+          setScene("Loved_Clean Her Home");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        } else if (choice === "Detached") {
+          setScene("Detached");
+          setGameEnded(true);
+          sendHistoryToEndpoint();
+          setShowEndingPage(true);
+        }
+        break;
+      case "Ignored":
+      case "Loved_Talk To Jan":
+      case "Loved_Clean Her Home":
+      case "Detached":
+      case "Jan Gets Better":
+      case "Appreciates":
+        setGameEnded(true);
+        sendHistoryToEndpoint();
+        setShowEndingPage(true);
+        break;
+      case "Ending":
+        renderEndingPage();
+        break;
+      default:
+        break;
     }
+    
     //Reset Rationale and Emotion
     setAgreement("");
     setApiResponse("");
@@ -962,7 +960,6 @@ minLength={80}
         return (
           <div>
             <p> Here is the AI rationale of your previous choice:</p>
-
           </div>
         );
       }
