@@ -1,79 +1,40 @@
 import React, { useState } from "react";
-import storyData from "./data/2.json";
+import useGameHistory from "./states/history";
+import useRationale from "./states/rationale";
+import useEmotion from "./states/emotion";
+import useAIResponse from "./states/response";
+import useOption from "./states/option";
+import useGameEnded from "./states/end";
+import useAgree from "./states/agree";
+import useDivID from "./states/divID";
+import fetchAIResponse from "./funcs/fetchAI";
+
+
 
 const GameComponent: React.FC = () => {
-  const generateUserId = () => {
-    // Generate a random user id
-    return Math.random().toString(36).substring(7);
-  };
-  const [divID, setDivID] = useState<number>(1);
-  const [option, setOption] = useState<string>("");
-  const [rationale, setRationale] = useState<string>("");
-  const [emotion, setEmotion] = useState<string>("");
-  const [agree, setAgree] = useState<boolean>(false);
-  const [gameEnded, setGameEnded] = useState<boolean>(false);
-  const [aiResponse, setAIResponse] = useState<string>("");
-  const [history, setHistory] = useState<{
-    userid: string;
-    context_id: number;
-    division: Record<
-      string,
-      {
-        Option: string;
-        user_rationale: string;
-        //api_response: string;
-        emotion: string;
-        agreeAI: boolean;
-      }
-    >;
-  }>({
-    userid: generateUserId(),
-    context_id: 1,
-    division: {},
-  });
+
+  const [history, addHistory] = useGameHistory();
+  const [rationale, setRationale] = useRationale();
+  const [emotion, setEmotion] = useEmotion();
+  const [aiResponse, setAIResponse] = useAIResponse();
+  const [option, setOption] = useOption();
+  const [gameEnded, setGameEnded] = useGameEnded();
+  const [agree, setAgree] = useAgree();
+  const [divID, setDivID] = useDivID();
+
+  
 
   // Assuming that options are strings, you may need to adjust this
   const handleOptionSelect = async (selectedOption: string) => {
     setOption(selectedOption);
     // Logic to determine next context
-    try {
-      const queryParams = new URLSearchParams({
-        scene: divID.toString(),
-        choice: selectedOption,
-      });
-      const response = await fetch(`/chatgpt/response?${queryParams}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setAIResponse(data.content.rationale);
-      } else {
-        throw new Error("Response not ok");
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    const aiResponse = await fetchAIResponse(divID, selectedOption);
+    setAIResponse(aiResponse);
   };
+  
 
   const handleSubmit = () => {
-    // const divName = `div+${divID}`;
-    setHistory((prevHistory) => {
-      return {
-        ...prevHistory,
-        division: {
-          ...prevHistory.division,
-          [`div${divID}`]: {
-            Option: option,
-            user_rationale: rationale,
-            emotion: emotion,
-            agreeAI: agree,
-          },
-        },
-      };
-    });
+    addHistory(`div${divID}`, { option, rationale, emotion, agree });
 
     // Clear current selections
     setOption("");
