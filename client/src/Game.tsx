@@ -183,6 +183,7 @@ const Game = () => {
       renderEndingPage();
     }
     //Reset Rationale and Emotion
+    setAgreement("");
     setApiResponse("");
     setRationale("");
     setEmotion("");
