@@ -8,7 +8,7 @@ import useGameEnded from "./states/end";
 import useAgree from "./states/agree";
 import useDivID from "./states/divID";
 import fetchAIResponse from "./funcs/fetchAI";
-
+import StoryContent from "./Story";
 
 
 const GameComponent: React.FC = () => {
@@ -40,6 +40,7 @@ const GameComponent: React.FC = () => {
     setOption("");
     setRationale("");
     setEmotion("");
+    setAIResponse("");
     setAgree(false);
   };
 
@@ -47,11 +48,12 @@ const GameComponent: React.FC = () => {
     <div>
       {/* Render your game UI here, for example: */}
       <h1> Mind Clash</h1>
+      <StoryContent A={"A"} stage={1} />
       <div>
         {/* Option selector */}
         {/* Update these options based on your game logic */}
         <button onClick={() => handleOptionSelect("A")}>A</button>
-        <button onClick={() => handleOptionSelect("B")}>Option 2</button>
+        <button onClick={() => handleOptionSelect("B")}>B</button>
       </div>
       <div>
         <p>{aiResponse}</p>
