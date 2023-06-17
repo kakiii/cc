@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import useGameHistory from "./states/history";
 import useRationale from "./states/rationale";
 import useEmotion from "./states/emotion";
 import useAIResponse from "./states/response";
 import useOption from "./states/option";
-import useGameEnded from "./states/end";
+// import useGameEnded from "./states/end";
 import useAgree from "./states/agree";
 import useDivID from "./states/divID";
 import fetchAIResponse from "./funcs/fetchAI";
@@ -12,12 +12,12 @@ import StoryContent from "./Story";
 import { handleOptionSelection } from "./funcs/handleOption";
 
 const GameComponent: React.FC = () => {
-  const [history, addHistory] = useGameHistory();
+  const [, addHistory] = useGameHistory();
   const [rationale, setRationale] = useRationale();
   const [emotion, setEmotion] = useEmotion();
   const [aiResponse, setAIResponse] = useAIResponse();
   const [option, setOption] = useOption();
-  const [gameEnded, setGameEnded] = useGameEnded();
+  // const [gameEnded, setGameEnded] = useGameEnded();
   const [agree, setAgree] = useAgree();
   const [divID, setDivID] = useDivID();
 
@@ -25,7 +25,7 @@ const GameComponent: React.FC = () => {
     setOption(selectedOption);
     const nextStage = handleOptionSelection(divID, selectedOption);
     if (nextStage > 4) {
-      setGameEnded(true);
+      // setGameEnded(true);
       return;
     } else {
       const response = await fetchAIResponse(nextStage, selectedOption);

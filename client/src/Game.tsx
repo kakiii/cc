@@ -18,7 +18,7 @@ const Game = () => {
     return sceneMap[scene] || "";
   }
   const [scene, setScene] = useState("Begin");
-  const [result, setResult] = useState("");
+  const [result, ] = useState("");
 
   const [gameEnded, setGameEnded] = useState(false);
   const [showEndingPage, setShowEndingPage] = useState(false);
@@ -90,7 +90,7 @@ const Game = () => {
         return;
       }
     }
-    const newResult: string = `${scene}+${choice}`;
+    // const newResult: string = `${scene}+${choice}`;
 
     setHistory((prevHistory) => {
       const divId = `div${Object.keys(prevHistory.division).length + 1}`;

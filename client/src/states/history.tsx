@@ -6,12 +6,12 @@ const generateUserId = (): string => {
   
 
 // Define an interface for the history data
-interface HistoryData {
-  option: string;
-  rationale: string;
-  emotion: string;
-  agree: boolean;
-}
+// interface HistoryData {
+//   option: string;
+//   rationale: string;
+//   emotion: string;
+//   agree: boolean;
+// }
 
 // Custom hook for managing game history
 const useGameHistory = () => {
