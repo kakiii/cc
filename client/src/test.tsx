@@ -10,11 +10,8 @@ import useDivID from "./states/divID";
 import fetchAIResponse from "./funcs/fetchAI";
 import StoryContent from "./Story";
 import { handleOptionSelection } from "./funcs/handleOption";
-// import useStoryStage from "./states/storyStage";
-
 
 const GameComponent: React.FC = () => {
-
   const [history, addHistory] = useGameHistory();
   const [rationale, setRationale] = useRationale();
   const [emotion, setEmotion] = useEmotion();
@@ -23,76 +20,80 @@ const GameComponent: React.FC = () => {
   const [gameEnded, setGameEnded] = useGameEnded();
   const [agree, setAgree] = useAgree();
   const [divID, setDivID] = useDivID();
-  const [stage, setStage] = useState<string>("-1");
 
-
-  
-
-  // Assuming that options are strings, you may need to adjust this
   const handleOptionSelect = async (selectedOption: string) => {
-    // Update the selected option logic here
-    
     setOption(selectedOption);
-    const nextStage = handleOptionSelection(stage, selectedOption);
-    console.log("option selected: " + selectedOption);
-    console.log("curr stage: " + stage);
-    console.log("next stage: " + nextStage);
-    // update the AI response
-    const response= await fetchAIResponse(String(parseInt(nextStage)+1), selectedOption);
-    setAIResponse(response);
+    const nextStage = handleOptionSelection(divID, selectedOption);
+    if(nextStage > 4){
+      setGameEnded(true);
+      return;
+    }else{
+    const response = await fetchAIResponse(nextStage, selectedOption);
+      setAIResponse(response);
+    // setDivID(nextStage);
+    }
+    
   };
-  
 
   const handleSubmit = () => {
+    if (!option) {
+      alert("Please select option A or B before submitting.");
+      return;
+    }
+  
     addHistory(`div${divID}`, { option, rationale, emotion, agree });
-
-    // Clear current selections
+  
     setOption("");
     setRationale("");
     setEmotion("");
     setAIResponse("");
     setAgree(false);
+  
+    setDivID(handleOptionSelection(divID, option));
   };
 
-  return (
-    <div>
-      {/* Render your game UI here, for example: */}
-      <h1> Mind Clash</h1>
-      <StoryContent stage={stage} />
-      <div>
-        {/* Option selector */}
-        {/* Update these options based on your game logic */}
-        <button onClick={() => handleOptionSelect("A")}>A</button>
-        <button onClick={() => handleOptionSelect("B")}>B</button>
-      </div>
-      <div>
-        <p>{aiResponse}</p>
-      </div>
-      <div>
-        {/* Rationale input */}
-        <textarea
-          value={rationale}
-          onChange={(e) => setRationale(e.target.value)}
-        />
-      </div>
-      <div>
-        {/* Emotion input */}
-        <textarea
-          value={emotion}
-          onChange={(e) => setEmotion(e.target.value)}
-        />
-      </div>
-      <div>
-        {/* Agree checkbox */}
-        <input
-          type="checkbox"
-          checked={agree}
-          onChange={(e) => setAgree(e.target.checked)}
-        />
-      </div>
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
-  );
+  const renderGameContent = () => {
+    if (divID > 4) {
+      // Game has ended, render end message
+      return <p>Game Ended!</p>;
+    } else {
+      // Game is still ongoing, render StoryContent and other elements
+      return (
+        <>
+          <StoryContent stage={divID} />
+          <div>
+            <button onClick={() => handleOptionSelect("A")}>A</button>
+            <button onClick={() => handleOptionSelect("B")}>B</button>
+          </div>
+          <div>
+            <p>{aiResponse}</p>
+          </div>
+          <div>
+            <textarea
+              value={rationale}
+              onChange={(e) => setRationale(e.target.value)}
+            />
+          </div>
+          <div>
+            <textarea
+              value={emotion}
+              onChange={(e) => setEmotion(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
+          </div>
+          <button onClick={handleSubmit}>Submit</button>
+        </>
+      );
+    }
+  };
+
+  return <div>{renderGameContent()}</div>;
 };
 
 export default GameComponent;

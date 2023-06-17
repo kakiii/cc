@@ -1,0 +1,101 @@
+[
+    {
+        "text": "(Scene: Skylar is playing soccer alone on the football field )\r\nSkylar: (grinning and sweating) I really like sports, sports mak me relax. but playing alone is kind of boring.\r\nSkylar: (thinking) maybe join the local soccer team can make it more interesting!",
+        "question": "What should Skylar do?",
+        "ending": false,
+        "option": {
+            "A": {
+                "text": "show up in practice directly",
+                "goto": 1
+            },
+            "B": {
+                "text": "connect with the local team leader",
+                "goto": 2
+            }
+        }
+    },
+    {
+        "text": "(Scene: Skylar on the football field which has some local soccer team member)\r\nSkylar: (Excited) Hey guysss! I am Skylar and I would like to join the local soccer team!\r\nTeam members: (turn their head and stare at Skylar) \u2026\u2026\u2026.\r\n",
+        "question": "How will Skylar feel next?",
+        "ending": false,
+        "option": {
+            "A": {
+                "text": "Embarrassed",
+                "goto": 3
+            },
+            "B": {
+                "text": "Confident",
+                "goto": 4
+            }
+        }
+    },
+    {
+        "text": "(Scene: Skylar on the football field which has some local soccer team member)\r\nSkylar: (Excited) Hey guysss! I am Skylar and I would like to join the local soccer team!\r\nTeam members: (turn their head and stare at Skylar) \u2026\u2026\u2026.\r\n",
+        "question": "What will Skylar do next?",
+        "ending": false,
+        "option": {
+            "A": {
+                "text": "Surprised, but still consider paying the money",
+                "goto": 5
+            },
+            "B": {
+                "text": "Angry, and decide to report the team leader for bribery",
+                "goto": 6
+            }
+        }
+    },
+    {
+        "text": "(Scene: on the football field )\r\nSkylar: (Embarrassed) Hmm\u2026.. Can I join you guys?\r\nTeam members: (contemptuously) Well ... the local soccer team is already full. Besides this, we don\u2019t want to accept a new member who doesn't have a strong physique.",
+        "question": "How would Skylar  feel as a result?",
+        "ending": false,
+        "option": {
+            "A": {
+                "text": "Feel inferior",
+                "goto": 7
+            },
+            "B": {
+                "text": "Furious",
+                "goto": 8
+            }
+        }
+    },
+    {
+        "text": "(Scene: on the football field )\r\nSkylar: (Confident)  I'm really skilled at soccer!\r\nTeam leader: (grinning) That's great to hear! We actually need one more player. Are you up for showing us what you've got?\r\nSkylar: (Confident) Absolutely! I'm ready to give it my all and show you my skills.\r\n",
+        "question": "What will Skylar do next?",
+        "ending": false,
+        "option": {
+            "A": {
+                "text": "Feel elated for being accepted",
+                "goto": 9
+            },
+            "B": {
+                "text": "Experience nervousness about showcasing his abilities",
+                "goto": 10
+            }
+        }
+    },
+    {
+        "text": "(Scene: in the cafe)\r\nSkylar: (taken aback) I didn't expect this condition, but I'm really passionate about joining the team. I'll consider paying the money, although it feels unusual.\r\n\r\nTeam leader: (satisfied) Great decision, Skylar. Your commitment is appreciated. Welcome to the team!\r\n",
+        "ending": true
+    },
+    {
+        "text": "(Scene: in the cafe)\r\nSkylar: (determined) I won't tolerate this kind of behavior. It goes against fair play and the integrity of the game. I'm going to report you to the appropriate authorities.\r\n\r\nTeam leader: (nervously) You can't prove anything! Don't try to ruin my reputation. You're not welcome on this team anymore.\r\n",
+        "ending": true
+    },
+    {
+        "text": "(Scene: on the football field )\r\nSkylar: (disappointed) Well\u2026. Alright\u2026\u2026.\r\n\n(Scene: in Skylar\u2019s room)\r\nSkylar: (tearing up) I never thought they would say I'm not strong enough. Their words hurt...\r\n\r\nSkylar's Friend: (softly and sadly smiling) Hey, don't let their negativity get to you. You have an amazing talent for soccer, Skylar. It's their loss for not recognizing it.\r\n\r\nSkylar: (tearing up with a glimmer of hope) Do you really think I'm a good player?\r\n\r\nSkylar's Friend: (grinning) Absolutely! You're the best soccer player I've ever seen. Come on, let's go out there and show them what you're made of.\r\n\r\nSkylar: (grinning) Thank you! Your words mean a lot to me. Let's go play soccer and prove them wrong!",
+        "ending": true
+    },
+    {
+        "text": "(Scene: on the football field)\r\nSkylar: (Angry) What did you just say?\r\n\r\nTeam leader: (contemptuously) I said you're not strong enough to join our team. This isn't the right place for you. Did I make myself clear?\r\n\r\nSkylar: (blushing with anger) You'll regret saying that. I'll show you just how strong I am.\n(Scene: on the street, suitable for confrontation)\r\nSkylar: ( angry)\r\n\r\nTeam leader: (contemptuously) Oh, here comes the hot-headed player.\r\n\r\nSkylar: (angry) You think you can belittle me? Well, I'm not backing down. Let's settle this right here, right now.\r\n\r\nTeam leader: (surprised) Are you challenging me to a fight?\r\n\r\nSkylar: (determined) Yes, I am. I'll prove to you and everyone else that I'm stronger than you think.\r\n\r\nConsequence: The two engage in a physical confrontation, showcasing Skylar's resilience and determination. Eventually, Skylar's display of strength and skill impresses not only the team leader but also the onlookers, gaining the respect and recognition Skylar deserves.",
+        "ending": true
+    },
+    {
+        "text": "(Scene: on the football field )\r\nSkylar: (with excitement) Thank you all for accepting me! I'm so thrilled to be a part of this team.\r\n\r\nTeam leader: (smiling) Welcome aboard, Skylar! We're glad to have you. Get ready to show us your skills in the upcoming practice sessions.",
+        "ending": true
+    },
+    {
+        "text": "(Scene: on the football field )\r\nSkylar: (nervously) I hope I can live up to everyone's expectations. I'm feeling a bit anxious about showing my abilities.\r\n\r\nTeam leader: (supportively) Don't worry, Skylar. Just be yourself and play the way you know. We're here to support and help you improve. Give it your best shot.",
+        "ending": true
+    }
+]

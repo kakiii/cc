@@ -1,4 +1,4 @@
-const fetchAIResponse = async (divID: string, selectedOption: string) => {
+const fetchAIResponse = async (divID: number, selectedOption: string) => {
   try {
     const queryParams = new URLSearchParams({
       scene: divID.toString(),
@@ -19,11 +19,11 @@ const fetchAIResponse = async (divID: string, selectedOption: string) => {
   } catch (err) {
     console.error(err);
   }
-// if (divID && selectedOption) {
-//   return "This is a test response.";
-// }else{
-//     return "Error: divID or selectedOption not defined.";
-// }
+  // if (divID && selectedOption) {
+  //   return "This is a test response.";
+  // } else {
+  //   return "Error: divID or selectedOption not defined.";
+  // }
 };
 
 export default fetchAIResponse;

@@ -18,31 +18,33 @@ interface StoryData {
 const storyData: StoryData = storyDataJSON as StoryData;
 
 interface StoryContentProps {
-  stage: string;
+  stage: number;
   choice?: string;
 
 }
 
 const StoryContent: React.FC<StoryContentProps> = ({ stage, choice }) => {
-  let stageString = "";
-  if (stage === "-1") {
-    stageString = "0";
+  let stageNum = undefined;
+  if (stage === -1) {
+    stageNum = 0;
   } else {
-    const nextStage = handleOptionSelection(stage, choice);
-    if (nextStage.length !== 1) console.error("Invalid next stage");
-    stageString = nextStage;
+    if (choice) {
+      stageNum = handleOptionSelection(stage, choice);
+    }else{
+      stageNum = stage;
+    }
     
   }
   
 
 
-  if (!storyData.hasOwnProperty(stageString)) {
+  if (!storyData.hasOwnProperty(stageNum)) {
     return <p>Invalid stage number</p>;
   }
 
-  const text = storyData[stageString].text;
-  const question = storyData[stageString].question;
-  const options = storyData[stageString].option;
+  const text = storyData[stageNum].text;
+  const question = storyData[stageNum].question;
+  const options = storyData[stageNum].option;
 
   const lines = text.split('\r\n');
   const paragraphs = lines.map((line, index) => <p key={index}>{line}</p>);
