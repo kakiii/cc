@@ -269,9 +269,8 @@ const Game = () => {
               placeholder="If you were Kendall, please write down your emotion"
               defaultValue=""
               onChange={(e) => setEmotion(e.target.value)}
-              minLength={250}
-              required
               minLength={80}
+              required
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
