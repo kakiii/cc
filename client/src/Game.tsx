@@ -8,9 +8,9 @@ const Game = () => {
   }
   function sceneTranslate(scene: string): string {
     const sceneMap: Record<string, string> = {
-      Begin: "1",
+      "Begin": "1",
       "In Love": "2",
-      Angry: "5",
+      "Angry": "5",
       "Talk To Jan": "3",
       "Clean Her Home": "4",
     };
@@ -19,13 +19,14 @@ const Game = () => {
   }
   const [scene, setScene] = useState("Begin");
   const [result, setResult] = useState("");
-  
+
   const [gameEnded, setGameEnded] = useState(false);
   const [showEndingPage, setShowEndingPage] = useState(false);
   //const [history, setHistory] = useState<{ option: string; rationale: string; emotion: string; }[]>([]);
   const [rationale, setRationale] = useState("");
   const [emotion, setEmotion] = useState("");
   const [apiResponse, setApiResponse] = useState("");
+  const [agreement, setAgreement] = useState("")
   const [history, setHistory] = useState<{
     userid: string;
     context_id: number;
@@ -36,6 +37,7 @@ const Game = () => {
         user_rationale: string;
         //api_response: string;
         emotion: string;
+        Agree_With_AI_Rationale: string;
       }
     >;
   }>({
@@ -79,7 +81,8 @@ const Game = () => {
   const handleChoice = async (
     choice: string,
     rationale: string,
-    emotion: string
+    emotion: string,
+    Agree_With_AI_Rationale: string
   ): Promise<void> => {
     if (!gameEnded) {
       if (rationale.length == 0 || emotion.length == 0) {
@@ -100,44 +103,55 @@ const Game = () => {
             user_rationale: rationale,
             //api_response: apiResponse,
             emotion: emotion,
+            Agree_With_AI_Rationale: Agree_With_AI_Rationale
           },
         },
       };
     });
 
     if (scene == "Begin" && choice === "In Love") {
+
       setResult(newResult);
       setScene("In Love");
     } else if (scene == "Begin" && choice == "Angry") {
+
       setResult(newResult);
       setScene("Angry");
     } else if (scene == "In Love" && choice == "Talk To Jan") {
+
       setResult(newResult);
       setScene("Talk To Jan");
     } else if (scene == "In Love" && choice == "Clean Her Home") {
+
       setResult(newResult);
       setScene("Clean Her Home");
     } else if (scene == "Angry" && choice == "Jan Gets Better") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Jan Gets Better");
     } else if (scene == "Angry" && choice == "Appreciates") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Appreciates");
     } else if (scene == "Talk To Jan" && choice == "Ignored") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Ignored");
     } else if (scene == "Talk To Jan" && choice == "Loved_Talk To Jan") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Talk To Jan");
     } else if (scene == "Clean Her Home" && choice == "Loved_Clean Her Home") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Loved_Clean Her Home");
     } else if (scene == "Clean Her Home" && choice == "Detached") {
+
       setGameEnded(true);
       setResult(newResult);
       setScene("Detached");
@@ -256,6 +270,7 @@ const Game = () => {
               onChange={(e) => setEmotion(e.target.value)}
               minLength={250}
               required
+              minLength={80}
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
@@ -263,12 +278,13 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setRationale(e.target.value)}
               required
+minLength={80}
             />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
-            <button onClick={() => handleChoice("In Love", rationale, emotion)}>
+            <button onClick={() => handleChoice("In Love", rationale, emotion, agreement)}>
               A: In love
             </button>
-            <button onClick={() => handleChoice("Angry", rationale, emotion)}>
+            <button onClick={() => handleChoice("Angry", rationale, emotion, agreement)}>
               B: Angry
             </button>
             {/* {Render The apiResponse} */}
@@ -284,6 +300,14 @@ const Game = () => {
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
             </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
+            </button>
+
           </div>
         );
       }
@@ -319,6 +343,7 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setEmotion(e.target.value)}
               required
+minLength={80}
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
@@ -326,15 +351,16 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setRationale(e.target.value)}
               required
+minLength={80}
             />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button
-              onClick={() => handleChoice("Talk To Jan", rationale, emotion)}
+              onClick={() => handleChoice("Talk To Jan", rationale, emotion, agreement)}
             >
               A: Talk to Jan
             </button>
             <button
-              onClick={() => handleChoice("Clean Her Home", rationale, emotion)}
+              onClick={() => handleChoice("Clean Her Home", rationale, emotion, agreement)}
             >
               B: Clean her home
             </button>
@@ -350,6 +376,13 @@ const Game = () => {
             </button>
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
+            </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
             </button>
           </div>
         );
@@ -395,6 +428,8 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setEmotion(e.target.value)}
               required
+minLength={80}
+
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
@@ -402,17 +437,19 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setRationale(e.target.value)}
               required
+minLength={80}
+
             />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button
               onClick={() =>
-                handleChoice("Jan Gets Better", rationale, emotion)
+                handleChoice("Jan Gets Better", rationale, emotion, agreement)
               }
             >
               A: Jan will get better
             </button>
             <button
-              onClick={() => handleChoice("Appreciates", rationale, emotion)}
+              onClick={() => handleChoice("Appreciates", rationale, emotion, agreement)}
             >
               B: Jan appreciates what Kendall does
             </button>
@@ -428,6 +465,13 @@ const Game = () => {
             </button>
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
+            </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
             </button>
           </div>
         );
@@ -468,6 +512,7 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setEmotion(e.target.value)}
               required
+minLength={80}
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
@@ -475,14 +520,15 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setRationale(e.target.value)}
               required
+minLength={80}
             />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
-            <button onClick={() => handleChoice("Ignored", rationale, emotion)}>
+            <button onClick={() => handleChoice("Ignored", rationale, emotion, agreement)}>
               A: Being Ignored
             </button>
             <button
               onClick={() =>
-                handleChoice("Loved_Talk To Jan", rationale, emotion)
+                handleChoice("Loved_Talk To Jan", rationale, emotion, agreement)
               }
             >
               B: Being Loved
@@ -499,6 +545,13 @@ const Game = () => {
             </button>
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
+            </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
             </button>
           </div>
         );
@@ -543,6 +596,7 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setEmotion(e.target.value)}
               required
+minLength={80}
             />
             <textarea
               style={{ width: "500px", height: "300px" }}
@@ -550,17 +604,18 @@ const Game = () => {
               defaultValue=""
               onChange={(e) => setRationale(e.target.value)}
               required
+minLength={80}
             />
             {/* <button type="submit" onClick={() => sendToBackEnd()}>Submit</button> */}
             <button
               onClick={() =>
-                handleChoice("Loved_Clean Her Home", rationale, emotion)
+                handleChoice("Loved_Clean Her Home", rationale, emotion, agreement)
               }
             >
               A: Being Loved
             </button>
             <button
-              onClick={() => handleChoice("Detached", rationale, emotion)}
+              onClick={() => handleChoice("Detached", rationale, emotion, agreement)}
             >
               B: Detached
             </button>
@@ -576,6 +631,13 @@ const Game = () => {
             </button>
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
+            </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
             </button>
           </div>
         );
@@ -630,7 +692,7 @@ const Game = () => {
                 reservations and build a loving and trusting partnership.)
               </h4>
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
             {/* {Render The apiResponse} */}
@@ -645,6 +707,13 @@ const Game = () => {
             </button>
             <button onClick={() => handleApiResponse(scene, "B")}>
               AI Rationale of B
+            </button>
+
+            <button id="agree" onClick={() => setAgreement("true")}>
+              I <h4>AGREE</h4> with the AI Rationale
+            </button>
+            <button id="disagree" onClick={() => setAgreement("false")}>
+              I <h4>DISAGREE</h4> with the AI Rationale
             </button>
           </div>
         );
@@ -689,7 +758,7 @@ const Game = () => {
                 both of them.)
               </h4>
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
           </div>
@@ -754,7 +823,7 @@ const Game = () => {
                 together.)
               </h4>
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
           </div>
@@ -808,7 +877,7 @@ const Game = () => {
               beautiful journey together, building a life filled with warmth,
               trust, and unwavering love.)
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
           </div>
@@ -844,7 +913,7 @@ const Game = () => {
                 their shared happiness to thrive.)
               </h4>
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
           </div>
@@ -883,7 +952,7 @@ const Game = () => {
                 shared responsibility in their journey.)
               </h4>
             </p>
-            <button onClick={() => handleChoice("Ending", "", "")}>
+            <button onClick={() => handleChoice("Ending", "", "", "")}>
               Ending
             </button>
           </div>
