@@ -1,46 +1,80 @@
 import React, { useState } from "react";
+import storyData from "./data/2.json";
 
-interface GameState {
-  userid: string;
-  context_id: number;
-  division: {
-    Option: string;
-    user_rationale: string;
-    emotion: string;
-    Agree: boolean;
-  }
-}
-
-const GameComponent: React.FC<{ userid: string }> = ({ userid }) => {
-  const [contextId, setContextId] = useState<number>(0);
+const GameComponent: React.FC = () => {
+  const generateUserId = () => {
+    // Generate a random user id
+    return Math.random().toString(36).substring(7);
+  };
+  const [divID, setDivID] = useState<number>(1);
   const [option, setOption] = useState<string>("");
   const [rationale, setRationale] = useState<string>("");
   const [emotion, setEmotion] = useState<string>("");
   const [agree, setAgree] = useState<boolean>(false);
-
-  const [history, setHistory] = useState<GameState[]>([]);
+  const [gameEnded, setGameEnded] = useState<boolean>(false);
+  const [aiResponse, setAIResponse] = useState<string>("");
+  const [history, setHistory] = useState<{
+    userid: string;
+    context_id: number;
+    division: Record<
+      string,
+      {
+        Option: string;
+        user_rationale: string;
+        //api_response: string;
+        emotion: string;
+        agreeAI: boolean;
+      }
+    >;
+  }>({
+    userid: generateUserId(),
+    context_id: 1,
+    division: {},
+  });
 
   // Assuming that options are strings, you may need to adjust this
-  const handleOptionSelect = (selectedOption: string) => {
+  const handleOptionSelect = async (selectedOption: string) => {
     setOption(selectedOption);
     // Logic to determine next context
-    setContextId((prevContextId) => prevContextId + 1);
+    try {
+      const queryParams = new URLSearchParams({
+        scene: divID.toString(),
+        choice: selectedOption,
+      });
+      const response = await fetch(`/chatgpt/response?${queryParams}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAIResponse(data.content.rationale);
+      } else {
+        throw new Error("Response not ok");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleSubmit = () => {
-    // Create a new game state
-    const newGameState: GameState = {
-      userid,
-      context_id: contextId,
-      division: {
-        Option: option,
-        user_rationale: rationale,
-        emotion,
-        Agree: agree,
-      },
-    };
-    // Add the new game state to the history
-    setHistory((prevHistory) => [...prevHistory, newGameState]);
+    // const divName = `div+${divID}`;
+    setHistory((prevHistory) => {
+      return {
+        ...prevHistory,
+        division: {
+          ...prevHistory.division,
+          [`div${divID}`]: {
+            Option: option,
+            user_rationale: rationale,
+            emotion: emotion,
+            agreeAI: agree,
+          },
+        },
+      };
+    });
+
     // Clear current selections
     setOption("");
     setRationale("");
@@ -55,12 +89,11 @@ const GameComponent: React.FC<{ userid: string }> = ({ userid }) => {
       <div>
         {/* Option selector */}
         {/* Update these options based on your game logic */}
-        <button onClick={() => handleOptionSelect("A")}>
-          A
-        </button>
-        <button onClick={() => handleOptionSelect("B")}>
-          B
-        </button>
+        <button onClick={() => handleOptionSelect("A")}>A</button>
+        <button onClick={() => handleOptionSelect("B")}>Option 2</button>
+      </div>
+      <div>
+        <p>{aiResponse}</p>
       </div>
       <div>
         {/* Rationale input */}
@@ -71,7 +104,10 @@ const GameComponent: React.FC<{ userid: string }> = ({ userid }) => {
       </div>
       <div>
         {/* Emotion input */}
-        <textarea value={emotion} onChange={(e) => setEmotion(e.target.value)} />
+        <textarea
+          value={emotion}
+          onChange={(e) => setEmotion(e.target.value)}
+        />
       </div>
       <div>
         {/* Agree checkbox */}
