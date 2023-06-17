@@ -9,6 +9,8 @@ import useAgree from "./states/agree";
 import useDivID from "./states/divID";
 import fetchAIResponse from "./funcs/fetchAI";
 import StoryContent from "./Story";
+import { handleOptionSelection } from "./funcs/handleOption";
+// import useStoryStage from "./states/storyStage";
 
 
 const GameComponent: React.FC = () => {
@@ -21,15 +23,23 @@ const GameComponent: React.FC = () => {
   const [gameEnded, setGameEnded] = useGameEnded();
   const [agree, setAgree] = useAgree();
   const [divID, setDivID] = useDivID();
+  const [stage, setStage] = useState<string>("-1");
+
 
   
 
   // Assuming that options are strings, you may need to adjust this
   const handleOptionSelect = async (selectedOption: string) => {
+    // Update the selected option logic here
+    
     setOption(selectedOption);
-    // Logic to determine next context
-    const aiResponse = await fetchAIResponse(divID, selectedOption);
-    setAIResponse(aiResponse);
+    const nextStage = handleOptionSelection(stage, selectedOption);
+    console.log("option selected: " + selectedOption);
+    console.log("curr stage: " + stage);
+    console.log("next stage: " + nextStage);
+    // update the AI response
+    const response= await fetchAIResponse(String(parseInt(nextStage)+1), selectedOption);
+    setAIResponse(response);
   };
   
 
@@ -48,7 +58,7 @@ const GameComponent: React.FC = () => {
     <div>
       {/* Render your game UI here, for example: */}
       <h1> Mind Clash</h1>
-      <StoryContent A={"A"} stage={1} />
+      <StoryContent stage={stage} />
       <div>
         {/* Option selector */}
         {/* Update these options based on your game logic */}
