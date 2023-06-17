@@ -24,15 +24,14 @@ const GameComponent: React.FC = () => {
   const handleOptionSelect = async (selectedOption: string) => {
     setOption(selectedOption);
     const nextStage = handleOptionSelection(divID, selectedOption);
-    if(nextStage > 4){
+    if (nextStage > 4) {
       setGameEnded(true);
       return;
-    }else{
-    const response = await fetchAIResponse(nextStage, selectedOption);
+    } else {
+      const response = await fetchAIResponse(nextStage, selectedOption);
       setAIResponse(response);
-    // setDivID(nextStage);
+      // setDivID(nextStage);
     }
-    
   };
 
   const handleSubmit = () => {
@@ -40,22 +39,27 @@ const GameComponent: React.FC = () => {
       alert("Please select option A or B before submitting.");
       return;
     }
-  
+
     addHistory(`div${divID}`, { option, rationale, emotion, agree });
-  
+
     setOption("");
     setRationale("");
     setEmotion("");
     setAIResponse("");
     setAgree(false);
-  
+
     setDivID(handleOptionSelection(divID, option));
   };
 
   const renderGameContent = () => {
     if (divID > 4) {
       // Game has ended, render end message
-      return <p>Game Ended!</p>;
+      return (
+        <>
+          <StoryContent stage={divID} />
+          <h4>Game Ended!</h4>
+        </>
+      );
     } else {
       // Game is still ongoing, render StoryContent and other elements
       return (
